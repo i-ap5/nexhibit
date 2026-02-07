@@ -70,7 +70,7 @@ const Hero: React.FC = () => {
         
         <h1 className={`type-heading text-[clamp(2.5rem,10vw,6.5rem)] font-extrabold text-white mt-10 mb-8 leading-[0.85] transition-all duration-[1.2s] delay-200 ease-out ${active ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
           Sculpting your <br />
-          <span className="font-extralight italic text-[#F58220]">Exhibition Identity.</span>
+          <span className="font-extralight italic text-[#F58220]">Brand Identity.</span>
         </h1>
 
         <div className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-12 transition-all duration-[1s] delay-500 ease-out ${active ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>

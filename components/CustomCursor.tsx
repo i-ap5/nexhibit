@@ -62,7 +62,7 @@ const CustomCursor: React.FC = () => {
       >
         <div className={`
           w-2 h-2 rounded-full transition-all duration-200
-          ${isHovering ? 'bg-[#F58220] scale-[3]' : 'bg-[#D9EA85]'}
+          ${isHovering ? 'bg-[#F58220] scale-[3]' : 'bg-[#1c1c1b]'}
         `} />
       </div>
     </>

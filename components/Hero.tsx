@@ -1,90 +1,119 @@
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { PerspectiveCamera, Float, MeshDistortMaterial } from '@react-three/drei';
+import { useGLTF, Environment, ContactShadows, OrbitControls, PerspectiveCamera } from '@react-three/drei';
+import { MotionContext } from '../App';
 import * as THREE from 'three';
 
-const OrganicCore = () => {
-  const mesh = useRef<THREE.Mesh>(null);
+// 3D Model Component
+const StallModel = () => {
+  const { scene } = useGLTF('/assets/stall.glb');
+  const group = useRef<THREE.Group>(null);
+  const { mouse } = useContext(MotionContext);
+
   useFrame((state) => {
-    if (!mesh.current) return;
-    mesh.current.rotation.y += 0.002;
-    mesh.current.rotation.z += 0.001;
+    if (!group.current) return;
+
+    // Smooth idle rotation
+    group.current.rotation.y += 0.002;
+
+    // Mouse influence
+    const targetRotX = mouse.y * 0.1;
+    const targetRotY = mouse.x * 0.15;
+
+    group.current.rotation.x += (targetRotX - group.current.rotation.x) * 0.05;
+    // We add to the auto-rotation
+    group.current.rotation.y += targetRotY * 0.05;
   });
 
   return (
-    <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
-      <mesh ref={mesh}>
-        <sphereGeometry args={[2.5, 128, 128]} />
-        <MeshDistortMaterial
-          color="#F58220"
-          speed={2.5}
-          distort={0.4}
-          radius={1}
-          emissive="#F58220"
-          emissiveIntensity={0.1}
-          transparent
-          opacity={0.8}
-          roughness={0.2}
-          metalness={0.9}
-        />
-      </mesh>
-      <mesh rotation={[Math.PI / 4, 0, 0]}>
-        <sphereGeometry args={[3.8, 32, 32]} />
-        <meshBasicMaterial color="white" wireframe transparent opacity={0.01} />
-      </mesh>
-    </Float>
+    <group ref={group} dispose={null} scale={2} position={[0, -2, 0]}>
+      <primitive object={scene} />
+    </group>
   );
 };
 
 const Hero: React.FC = () => {
-  const [active, setActive] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setActive(true), 150);
-    return () => clearTimeout(timer);
+    setLoaded(true);
   }, []);
 
   return (
-    <section className="relative h-screen flex flex-col justify-center bg-[#030405] overflow-hidden px-6 lg:px-24">
-      <div className="absolute inset-0 z-0 bg-blueprint opacity-[0.25]" />
-      
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        <Canvas>
-          <PerspectiveCamera makeDefault position={[3, 0, 10]} fov={40} />
-          <ambientLight intensity={1.5} />
-          <pointLight position={[10, 5, 5]} intensity={200} color="#F58220" />
-          <OrganicCore />
-        </Canvas>
-      </div>
+    <section className="relative min-h-screen w-full bg-white overflow-hidden flex flex-col justify-center px-6 lg:px-24">
 
-      <div className="z-20 max-w-screen-xl w-full mx-auto relative flex flex-col items-center lg:items-start text-center lg:text-left">
-        <div className={`transition-all duration-[1s] ease-out ${active ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-          <div className="flex items-center gap-4 justify-center lg:justify-start">
-            <div className="w-2 h-2 bg-[#F58220] rounded-full animate-pulse" />
-            <span className="type-label text-white/50">
-              Exhibition Stall Architects & Fabricators
+      {/* Background Gradient */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-gray-50 via-white to-gray-100" />
+
+      <div className="container mx-auto z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center h-full pt-20">
+
+        {/* Left: Typography */}
+        <div className="lg:col-span-5 relative z-20">
+          <div className={`overflow-hidden transition-all duration-1000 delay-100 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-8 h-[2px] bg-[#F58220]" />
+              <span className="type-label text-[#F58220] tracking-[0.3em] font-bold">
+                Architectural Fabrication
+              </span>
+            </div>
+          </div>
+
+          <h1 className={`text-[clamp(3.5rem,5vw,5.5rem)] font-black text-[#1c1c1b] leading-[0.95] tracking-tighter mb-8 transition-all duration-1000 delay-300 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            We Don't Just <br />
+            Build Stalls. <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F58220] to-[#1c1c1b]">
+              We Define Space.
             </span>
+          </h1>
+
+          <p className={`text-black/60 text-lg leading-relaxed max-w-md mb-10 transition-all duration-1000 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            Nexhibit Arabia combines advanced structural engineering with brand storytelling to create immersive, award-winning pavilions.
+          </p>
+
+          <div className={`flex flex-wrap gap-4 transition-all duration-1000 delay-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+            <button className="px-8 py-4 bg-[#1c1c1b] text-white type-label text-[11px] hover:bg-[#F58220] hover:scale-105 transition-all shadow-xl rounded-sm">
+              Start Your Brief
+            </button>
+            <button className="px-8 py-4 border border-black/10 text-[#1c1c1b] type-label text-[11px] hover:border-black/30 transition-all rounded-sm bg-white/50 backdrop-blur-sm">
+              View Case Studies
+            </button>
           </div>
         </div>
-        
-        <h1 className={`type-heading text-[clamp(2.5rem,10vw,6.5rem)] font-extrabold text-white mt-10 mb-8 leading-[0.85] transition-all duration-[1.2s] delay-200 ease-out ${active ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          Sculpting your <br />
-          <span className="font-extralight italic text-[#F58220]">Brand Identity.</span>
-        </h1>
 
-        <div className={`flex flex-col lg:flex-row items-center gap-6 lg:gap-12 transition-all duration-[1s] delay-500 ease-out ${active ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="w-16 h-[1px] bg-[#F58220]/60 hidden lg:block" />
-          <p className="font-medium text-white/40 tracking-[0.05em] text-sm lg:text-xl max-w-xl">
-            We are the visionary creators behind the world's most innovative exhibition stalls and brand pavilions.
-          </p>
+        {/* Right: The 3D Stall Viewer */}
+        <div className="lg:col-span-7 relative h-[60vh] lg:h-[80vh] w-full cursor-grab active:cursor-grabbing">
+          <div className={`w-full h-full transition-opacity duration-1000 ${loaded ? 'opacity-100' : 'opacity-0'}`}>
+            <Canvas shadows dpr={[1, 2]}>
+              <PerspectiveCamera makeDefault position={[5, 2, 8]} fov={40} />
+              <ambientLight intensity={0.7} />
+              <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} castShadow />
+              <Environment preset="city" />
+
+              <StallModel />
+
+              <ContactShadows position={[0, -2, 0]} opacity={0.4} scale={10} blur={2.5} far={4} />
+              <OrbitControls enableZoom={false} autoRotate={false} />
+            </Canvas>
+
+            {/* 3D Label */}
+            <div className="absolute bottom-4 right-4 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-sm border border-black/5 shadow-lg pointer-events-none">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-[#F58220] animate-pulse" />
+                <span className="type-label text-[9px] text-black">Live 3D Render</span>
+              </div>
+            </div>
+          </div>
         </div>
+
       </div>
 
-      <div className={`absolute bottom-12 left-1/2 lg:left-24 -translate-x-1/2 lg:translate-x-0 flex items-center gap-4 transition-all duration-1000 delay-1000 ${active ? 'opacity-30' : 'opacity-0'}`}>
-        <span className="type-label whitespace-nowrap text-[9px] font-bold">Discover Stalls</span>
-        <div className="w-16 h-[1px] bg-white origin-left" />
+      {/* Bottom Scroll Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-40">
+        <div className="w-[1px] h-12 bg-[#1c1c1b] animate-bounce" />
+        <span className="type-label text-[9px] tracking-widest text-[#1c1c1b]">Scroll</span>
       </div>
+
     </section>
   );
 };

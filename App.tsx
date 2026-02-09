@@ -43,7 +43,7 @@ const App: React.FC = () => {
 
   return (
     <MotionContext.Provider value={{ scrollY, mouse }}>
-      <div className="min-h-screen bg-[#030405] text-white selection:bg-[#F58220] selection:text-black font-sans scroll-smooth">
+      <div className="min-h-screen bg-white text-[#1c1c1b] selection:bg-[#F58220] selection:text-white font-sans scroll-smooth">
         <CustomCursor />
         
         <header className="fixed top-0 left-0 w-full z-50 px-6 lg:px-12 py-6 flex justify-between items-center pointer-events-none">
@@ -95,7 +95,7 @@ const App: React.FC = () => {
           </nav>
 
           <div className="pointer-events-auto">
-            <button className="type-label border border-white/10 px-4 py-2 hover:border-[#F58220] hover:text-[#F58220] transition-all">
+            <button className="type-label border border-black/10 px-4 py-2 hover:border-[#F58220] hover:text-[#F58220] transition-all">
               Contact
             </button>
           </div>
@@ -125,18 +125,18 @@ const App: React.FC = () => {
           <Invitation />
         </main>
 
-        <footer className="py-20 bg-black/40 border-t border-white/5 relative overflow-hidden">
-          <div className="absolute inset-0 bg-blueprint opacity-[0.03]" />
+        <footer className="py-20 bg-stone-50 border-t border-black/5 relative overflow-hidden">
+          <div className="absolute inset-0 bg-blueprint opacity-[0.05]" />
           <div className="container mx-auto px-8 max-w-screen-xl flex flex-col md:flex-row justify-between items-center gap-12 relative z-10">
-            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 opacity-30">
+            <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8 opacity-40">
               <span className="type-label">Nexhibit Arabia // Riyadh</span>
             </div>
-            <div className="flex flex-wrap justify-center gap-8 opacity-20">
+            <div className="flex flex-wrap justify-center gap-8 opacity-30">
               <p className="type-label">Conceptual</p>
               <p className="type-label">Digital</p>
               <p className="type-label">Physical</p>
             </div>
-            <p className="type-label opacity-10">© 2026 // Designed by Trowcode.</p>
+            <p className="type-label opacity-20">© 2026 // Designed by Trowcode.</p>
           </div>
         </footer>
       </div>

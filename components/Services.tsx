@@ -3,24 +3,34 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const capabilities = [
   {
-    title: "Stall Design & Strategy",
-    desc: "Merging brand architecture with exhibition floor logic to create award-winning bespoke stalls."
+    title: "Event Management",
+    desc: "Comprehensive production oversight for corporate galas, high-stakes product launches, and immersive brand activations.",
+    image: "https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=2070&auto=format&fit=crop"
   },
   {
-    title: "3D Digital Prototyping",
-    desc: "High-fidelity digital twins that allow you to walk through your pavilion before fabrication begins."
+    title: "Exhibition Stand Builder",
+    desc: "Precision-engineered bespoke stalls that merge structural integrity with award-winning aesthetic presence.",
+    image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
   },
   {
-    title: "Custom Fabrication",
-    desc: "Masterful production of custom exhibition elements using high-grade, sustainable materials in our own facilities."
+    title: "Indoor & Outdoor Branding",
+    desc: "Large-scale environmental graphics and structural identity systems that transform physical spaces into brand stories.",
+    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
   },
   {
-    title: "Deployment & Logistics",
-    desc: "Seamless white-glove transport and technical installation at major centers across Riyadh, Dubai, and beyond."
+    title: "Display Stand Manufacturer",
+    desc: "Bespoke retail fixtures and engineered product showcases designed for technical excellence and high visibility.",
+    image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2070&auto=format&fit=crop"
   },
   {
-    title: "On-site Supervision",
-    desc: "Total on-floor project management. We handle every technical detail during the live show hours."
+    title: "Signages",
+    desc: "Architectural 3D lettering and intelligent wayfinding systems crafted with premium materials and luminous precision.",
+    image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070&auto=format&fit=crop"
+  },
+  {
+    title: "Media Production",
+    desc: "Immersive digital content and cinematic storytelling designed to anchor physical experiences in the digital realm.",
+    image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop"
   }
 ];
 
@@ -29,7 +39,7 @@ const CapabilityItem = ({ item, index, activeIndex }: { item: typeof capabilitie
 
   return (
     <div
-      className={`py-20 lg:py-32 border-b border-black/5 transition-all duration-1000 flex flex-col gap-6
+      className={`py-16 lg:py-24 border-b border-black/5 transition-all duration-1000 flex flex-col gap-6
         ${isActive ? 'opacity-100 translate-x-4' : 'opacity-10'}`}
     >
       <div className="flex items-center gap-6">
@@ -87,27 +97,54 @@ const Services: React.FC = () => {
       <div className="container mx-auto px-6 lg:px-24">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative">
 
-          {/* Sticky Left Sidebar - Header stays still while user scrolls */}
-          <div className="lg:col-span-5 lg:h-screen lg:sticky lg:top-0 flex flex-col justify-center py-20 lg:py-0 z-20">
-            <div className="transition-all duration-700">
-              <span className="type-label text-[#F58220] block mb-10">Technical Suite</span>
-              <h2 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-[#1c1c1b] leading-[0.85] mb-12">
-                Precision <br /> <span className="text-black/10">Stall Builds.</span>
+          {/* Sticky Left Sidebar - Bounded to Parent Grid */}
+          <div className="lg:col-span-12 xl:col-span-5 h-fit lg:sticky lg:top-24 py-8 z-20">
+            <div className="transition-all duration-1000">
+
+              {/* Dynamic Image Window */}
+              <div className="aspect-[21/9] w-full mb-6 overflow-hidden rounded-sm relative border border-black/5 bg-stone-100 group shadow-sm">
+                <div className="absolute inset-0 bg-blueprint opacity-[0.03] z-10 pointer-events-none" />
+                {capabilities.map((cap, i) => (
+                  <img
+                    key={i}
+                    src={cap.image}
+                    alt={cap.title}
+                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]
+                      ${i === activeIndex ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-105 rotate-0'}`}
+                    style={{ willChange: 'opacity, transform' }}
+                  />
+                ))}
+
+                {/* Visual Metadata Overlay */}
+                <div className="absolute inset-x-0 bottom-0 p-4 flex justify-end items-end z-20">
+                  <span className="type-label text-[6px] text-white/30 font-mono tracking-tighter">MTRX_{activeIndex + 1} //</span>
+                </div>
+              </div>
+
+              <span className="type-label text-[#F58220] block mb-6">Core Capabilities</span>
+              <h2 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-[#1c1c1b] leading-[0.85] mb-8">
+                What we <br /> <span className="text-black/10">deliver.</span>
               </h2>
-              <p className="text-black/40 font-light text-lg lg:text-xl max-w-sm leading-relaxed">
-                We are specialists in high-end exhibition stalls. Every technical service is executed with the precision of architectural masters.
+              <p className="text-black/40 font-light text-sm lg:text-base max-w-sm leading-relaxed mb-8">
+                A comprehensive suite of production and management services engineered to elevate your brand's physical presence.
               </p>
 
-              <div className="mt-16 flex items-center gap-6">
-                <div className="flex flex-col gap-2">
+              {/* Progress Indicators & Legend */}
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center gap-2">
                   {capabilities.map((_, i) => (
                     <div
                       key={i}
-                      className={`h-1 transition-all duration-500 rounded-full ${i === activeIndex ? 'w-12 bg-[#F58220]' : 'w-4 bg-black/10'}`}
+                      className={`h-[2px] transition-all duration-500 rounded-full ${i === activeIndex ? 'w-10 bg-[#F58220]' : 'w-2 bg-black/10'}`}
                     />
                   ))}
                 </div>
-                <span className="type-label text-[9px] text-black/30">Scroll to Explore</span>
+                <div className="flex flex-col gap-1">
+                  {/* <span className="type-label text-[7px] text-black/20 uppercase tracking-[0.3em] font-bold">Projected Phase</span> */}
+                  <span className="type-label text-[10px] text-[#F58220] transition-all duration-500 font-black uppercase tracking-widest">
+                    {capabilities[activeIndex].title}
+                  </span>
+                </div>
               </div>
             </div>
           </div>

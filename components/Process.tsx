@@ -108,7 +108,7 @@ const Process: React.FC = () => {
     }, { scope: containerRef });
 
     return (
-        <section ref={containerRef} id="process-section" className="relative w-full h-screen bg-[#0a0a09] text-white overflow-hidden flex flex-col justify-center">
+        <section ref={containerRef} id="process-section" className="relative w-full h-screen bg-[#000000] text-white overflow-hidden flex flex-col justify-center">
 
             {/* Background Grid */}
             <div className="absolute inset-0 pointer-events-none opacity-[0.03]">

@@ -49,7 +49,7 @@ const App: React.FC = () => {
       { threshold: 0.3 }
     );
 
-    ['about', 'process', 'works', 'identity', 'services'].forEach((id) => {
+    ['about', 'services', 'path', 'process', 'works', 'identity'].forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -66,9 +66,9 @@ const App: React.FC = () => {
 
   const navLinks = [
     { name: 'About', id: 'about' },
+    { name: 'Services', id: 'services' },
     { name: 'Process', id: 'process' },
     { name: 'Works', id: 'works' },
-    { name: 'Capabilities', id: 'services' }
   ];
 
   return (
@@ -175,10 +175,10 @@ const App: React.FC = () => {
 
           <div className="absolute bottom-12 left-0 w-full px-8 flex flex-col gap-10">
             <div className="flex flex-col gap-8 border-b border-black/[0.05] pb-10">
-              <div className="flex flex-col gap-1">
+              {/* <div className="flex flex-col gap-1">
                 <span className="type-label text-[7px] opacity-30 uppercase tracking-[0.2em]">Regional Office</span>
                 <p className="type-label text-[9px] text-black/40">Riyadh // Kingdom of Saudi Arabia</p>
-              </div>
+              </div> */}
 
               <button className="w-full py-5 rounded-full bg-black text-white type-label text-[10px] tracking-[0.4em] uppercase flex items-center justify-center gap-4 group/mobile-btn overflow-hidden relative transition-all duration-500 hover:bg-[#F58220]">
                 <span className="relative z-10">Explore Portfolio</span>
@@ -198,27 +198,29 @@ const App: React.FC = () => {
         <main className="relative z-10">
           <Hero />
 
-          <div id="about">
+          <div id="about" className="relative z-10 bg-white">
             <Belief />
           </div>
 
-          <div id="path">
+          <div className="relative z-20">
+            <Services />
+          </div>
+
+          <div id="path" className="relative z-30">
             <PathSection />
           </div>
 
-          <div id="process">
+          <div id="process" className="relative z-40">
             <Process />
           </div>
 
-          <div id="works">
+          <div id="works" className="relative z-50">
             <Portfolio />
           </div>
 
-          <div id="identity">
+          <div id="identity" className="relative z-50">
             <MissionVision />
           </div>
-
-          <Services />
 
           <Invitation />
         </main>

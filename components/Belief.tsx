@@ -27,7 +27,7 @@ const Belief: React.FC = () => {
           <div className={`transition-all duration-1000 ${visible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}>
             <span className="type-label text-[#F58220] block mb-8">Specialized Expertise</span>
             <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold tracking-tighter leading-[0.95] text-[#1c1c1b]">
-              Exhibition Stalls <br /> <span className="font-extralight italic text-[#F58220]">that command attention.</span>
+              Exhibition Stalls <br /> <span className="font-extralight text-[#F58220]">that command attention.</span>
             </h2>
           </div>
 

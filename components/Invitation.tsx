@@ -29,8 +29,17 @@ const Invitation: React.FC = () => {
           </div>
         </div>
 
-        <button className="relative px-16 py-6 bg-[#1c1c1b] text-white type-label text-[10px] hover:bg-[#F58220] hover:text-white transition-all duration-500 shadow-2xl">
-          Initiate Design Brief
+        <button className="group relative px-16 py-6 rounded-full bg-[#1c1c1b] text-white type-label text-[10px] tracking-[0.4em] uppercase transition-all duration-500 hover:pr-24 hover:-translate-y-2 shadow-2xl overflow-hidden">
+          <span className="relative z-10">Initiate Design Brief</span>
+
+          {/* Sliding Arrow Icon */}
+          <div className="absolute right-10 opacity-0 translate-x-10 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
+            <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-[#F58220] stroke-[2.5]" >
+              <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+
+          <div className="absolute inset-0 bg-white/5 -translate-x-full group-hover:animate-[shimmer_2s_infinite] pointer-events-none" />
         </button>
       </div>
     </section>

@@ -6,6 +6,46 @@
     --text-main: #1c1c1b;
 }
 
+@keyframes border-draw {
+    0% {
+        stroke-dashoffset: 100%;
+    }
+
+    100% {
+        stroke-dashoffset: -100%;
+    }
+}
+
+@keyframes border-travel {
+    0% {
+        stroke-dashoffset: 100;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes border-flow {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
 body {
     margin: 0;
     background-color: var(--bg-color);
@@ -37,10 +77,42 @@ body::before {
 }
 
 .glass-pill {
-    background: rgba(0, 0, 0, 0.03);
-    backdrop-filter: blur(30px) saturate(150%);
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    backdrop-filter: blur(20px) saturate(180%);
     border-radius: 999px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-light {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.03);
+}
+
+.glass-dark {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.nav-link {
+    position: relative;
+    padding: 0.5rem 0;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent-orange);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
 }
 
 .bg-blueprint {
@@ -77,4 +149,15 @@ body::before {
     letter-spacing: 0.3em;
     font-weight: 800;
     font-size: 0.6rem;
+}
+@keyframes pulse-glow {
+    0%, 100% { 
+        opacity: 0.3; 
+        transform: translateX(0); 
+    }
+    50% { 
+        opacity: 1; 
+        transform: translateX(5px); 
+        filter: drop-shadow(0 0 5px #F58220); 
+    }
 }

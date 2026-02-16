@@ -114,7 +114,7 @@ const PathSection: React.FC = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} id="process" className="relative h-screen w-full bg-black text-white overflow-hidden flex items-center">
+    <section ref={containerRef} className="relative h-screen w-full bg-black text-white overflow-hidden flex items-center">
 
       {/* Background Ambience */}
       <div className="absolute inset-0 pointer-events-none">

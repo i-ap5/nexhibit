@@ -34,33 +34,35 @@ const capabilities = [
   }
 ];
 
-const CapabilityItem = ({ item, index, activeIndex }: { item: typeof capabilities[0], index: number, activeIndex: number }) => {
-  const isActive = index === activeIndex;
+const CapabilityItem = ({ item, index, activeIndices }: { item: typeof capabilities[0], index: number, activeIndices: number[] }) => {
+  const isActive = activeIndices.includes(index);
 
   return (
     <div
-      className={`py-16 lg:py-24 border-b border-black/5 transition-all duration-1000 flex flex-col gap-6
-        ${isActive ? 'opacity-100 translate-x-4' : 'opacity-10'}`}
+      className={`py-12 border-b border-black/5 transition-all duration-700 flex flex-col gap-4
+        ${isActive ? 'opacity-100' : 'opacity-10'}`}
     >
       <div className="flex items-center gap-6">
         <span className={`type-label text-[10px] font-black transition-colors duration-700 ${isActive ? 'text-[#F58220]' : 'text-black/20'}`}>
           0{index + 1}
         </span>
-        <h3 className="text-3xl md:text-6xl font-extrabold tracking-tighter text-[#1c1c1b] leading-none">
+        <h3 className={`text-3xl md:text-5xl font-extrabold tracking-tighter transition-colors duration-700 leading-none
+          ${isActive ? 'text-[#1c1c1b]' : 'text-black/20'}`}>
           {item.title}
         </h3>
       </div>
-      <p className={`text-lg md:text-xl font-light leading-relaxed max-w-xl pl-12 md:pl-20 transition-all duration-700 delay-100 ${isActive ? 'text-black/60' : 'text-transparent'}`}>
+      <p className={`text-base md:text-lg font-light leading-relaxed max-w-xl pl-12 md:pl-20 transition-all duration-700 ${isActive ? 'text-black/60 max-h-40 opacity-100 mt-2' : 'max-h-0 opacity-0 overflow-hidden'}`}>
         {item.desc}
       </p>
 
-      <div className={`mt-8 h-[1px] bg-[#F58220] transition-all duration-1000 ease-out ${isActive ? 'w-40' : 'w-0'}`} />
+      <div className={`h-[1px] bg-[#F58220] transition-all duration-700 ease-out ${isActive ? 'w-40 mt-4' : 'w-0'}`} />
     </div>
   );
 };
 
 const Services: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndices, setActiveIndices] = useState<number[]>([0]);
+  const primaryIndex = activeIndices[0] ?? 0;
   const containerRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -71,15 +73,17 @@ const Services: React.FC = () => {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting && entry.intersectionRatio > 0.5) {
-              setActiveIndex(index);
+            if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
+              setActiveIndices(prev => prev.includes(index) ? prev : [...prev, index].sort((a, b) => a - b));
+            } else {
+              setActiveIndices(prev => prev.filter(i => i !== index));
             }
           });
         },
         {
           root: null,
-          threshold: [0.1, 0.5, 0.9],
-          rootMargin: "-20% 0px -20% 0px"
+          threshold: [0, 0.3, 0.6, 1.0],
+          rootMargin: "-10% 0px -10% 0px"
         }
       );
 
@@ -110,19 +114,19 @@ const Services: React.FC = () => {
                     src={cap.image}
                     alt={cap.title}
                     className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]
-                      ${i === activeIndex ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-105 rotate-0'}`}
+                      ${i === primaryIndex ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-105 rotate-0'}`}
                     style={{ willChange: 'opacity, transform' }}
                   />
                 ))}
 
                 {/* Visual Metadata Overlay */}
                 <div className="absolute inset-x-0 bottom-0 p-4 flex justify-end items-end z-20">
-                  <span className="type-label text-[6px] text-white/30 font-mono tracking-tighter">MTRX_{activeIndex + 1} //</span>
+                  <span className="type-label text-[6px] text-white/30 font-mono tracking-tighter">MTRX_{primaryIndex + 1} //</span>
                 </div>
               </div>
 
               <span className="type-label text-[#F58220] block mb-6">Core Capabilities</span>
-              <h2 className="text-5xl md:text-7xl font-extrabold tracking-tighter text-[#1c1c1b] leading-[0.85] mb-8">
+              <h2 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-[#1c1c1b] leading-[0.85] mb-8">
                 What we <br /> <span className="text-black/10">deliver.</span>
               </h2>
               <p className="text-black/40 font-light text-sm lg:text-base max-w-sm leading-relaxed mb-8">
@@ -135,22 +139,21 @@ const Services: React.FC = () => {
                   {capabilities.map((_, i) => (
                     <div
                       key={i}
-                      className={`h-[2px] transition-all duration-500 rounded-full ${i === activeIndex ? 'w-10 bg-[#F58220]' : 'w-2 bg-black/10'}`}
+                      className={`h-[2px] transition-all duration-500 rounded-full ${activeIndices.includes(i) ? 'w-10 bg-[#F58220]' : 'w-2 bg-black/10'}`}
                     />
                   ))}
                 </div>
                 <div className="flex flex-col gap-1">
-                  {/* <span className="type-label text-[7px] text-black/20 uppercase tracking-[0.3em] font-bold">Projected Phase</span> */}
                   <span className="type-label text-[10px] text-[#F58220] transition-all duration-500 font-black uppercase tracking-widest">
-                    {capabilities[activeIndex].title}
+                    {capabilities[primaryIndex].title}
                   </span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Scrollable Right Content - The list that moves while the page stays */}
-          <div ref={containerRef} className="lg:col-span-7 flex flex-col pb-[30vh]">
+          {/* Scrollable Right Content - Stacked Layout */}
+          <div ref={containerRef} className="lg:col-span-7 flex flex-col pb-[50vh]">
             {capabilities.map((item, i) => (
               <div
                 key={i}
@@ -160,7 +163,7 @@ const Services: React.FC = () => {
                 <CapabilityItem
                   item={item}
                   index={i}
-                  activeIndex={activeIndex}
+                  activeIndices={activeIndices}
                 />
               </div>
             ))}

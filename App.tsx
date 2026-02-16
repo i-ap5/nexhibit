@@ -9,9 +9,9 @@ import MissionVision from './components/MissionVision';
 import Invitation from './components/Invitation';
 import CustomCursor from './components/CustomCursor';
 
-export const MotionContext = createContext<{ scrollY: number; mouse: { x: number; y: number } }>({ 
-  scrollY: 0, 
-  mouse: { x: 0, y: 0 } 
+export const MotionContext = createContext<{ scrollY: number; mouse: { x: number; y: number } }>({
+  scrollY: 0,
+  mouse: { x: 0, y: 0 }
 });
 
 const App: React.FC = () => {
@@ -34,7 +34,7 @@ const App: React.FC = () => {
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('mousemove', handleMouseMove);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
@@ -45,7 +45,7 @@ const App: React.FC = () => {
     <MotionContext.Provider value={{ scrollY, mouse }}>
       <div className="min-h-screen bg-white text-[#1c1c1b] selection:bg-[#F58220] selection:text-white font-sans scroll-smooth">
         <CustomCursor />
-        
+
         <header className="fixed top-0 left-0 w-full z-50 px-6 lg:px-12 py-6 flex justify-between items-center pointer-events-none">
           {/* <div className="flex items-center gap-3 pointer-events-auto group cursor-pointer">
             <div className="w-8 h-8 border border-white/10 group-hover:border-[#F58220] transition-colors duration-500 flex items-center justify-center bg-white/5 rounded-sm">
@@ -57,25 +57,25 @@ const App: React.FC = () => {
             </div>
           </div> */}
           <div className="flex items-center gap-3 pointer-events-auto group cursor-pointer">
-  {/* <div className="w-30.  h-8 border border-white/10 group-hover:border-[#F58220] transition-colors duration-500 flex items-center justify-center bg-white/5 rounded-sm overflow-hidden"> */}
-     <div className="w-30.  h-12  group-hover:border-[#F58220] transition-colors duration-500 flex items-center justify-center rounded-sm overflow-hidden">
+            {/* <div className="w-30.  h-8 border border-white/10 group-hover:border-[#F58220] transition-colors duration-500 flex items-center justify-center bg-white/5 rounded-sm overflow-hidden"> */}
+            <div className="w-30.  h-12  group-hover:border-[#F58220] transition-colors duration-500 flex items-center justify-center rounded-sm overflow-hidden">
 
-    <img
-      src="/assets/nexhibit.png"
-      alt="Nexhibit Arabia Logo"
-      className="w-full h-full object-contain"
-    />
-  </div>
+              <img
+                src="/assets/nexhibit.png"
+                alt="Nexhibit Arabia Logo"
+                className="w-full h-full object-contain"
+              />
+            </div>
 
-  <div className="flex flex-col">
-      {/* <span className="font-bold tracking-[0.2em] text-[16px] uppercase leading-none">
+            <div className="flex flex-col">
+              {/* <span className="font-bold tracking-[0.2em] text-[16px] uppercase leading-none">
         Nexhibit
       </span>
       <span className="font-medium tracking-[0.1em] text-[12px] uppercase text-[#F58220]">
         Arabia
       </span> */}
-  </div>
-</div>
+            </div>
+          </div>
 
 
           <nav className={`
@@ -84,9 +84,9 @@ const App: React.FC = () => {
             hidden md:flex
           `}>
             {['About', 'Process', 'Works', 'Capabilities'].map((item) => (
-              <a 
-                key={item} 
-                href={`#${item.toLowerCase()}`} 
+              <a
+                key={item}
+                href={`#${item.toLowerCase()}`}
                 className="type-label opacity-50 hover:opacity-100 transition-opacity"
               >
                 {item}
@@ -103,7 +103,7 @@ const App: React.FC = () => {
 
         <main className="relative z-10">
           <Hero />
-          
+
           <div id="about">
             <Belief />
           </div>
@@ -121,7 +121,7 @@ const App: React.FC = () => {
           </div>
 
           <Services />
-          
+
           <Invitation />
         </main>
 

@@ -109,19 +109,9 @@ const Hero: React.FC = () => {
     <section
       onMouseMove={(e) => {
         const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        // Calculate velocity for ripple intensity
-        const dx = e.movementX;
-        const dy = e.movementY;
-        const velocity = Math.sqrt(dx * dx + dy * dy);
-        const rippleScale = Math.min(20 + velocity * 2, 60);
-
-        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
+        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
         e.currentTarget.style.setProperty('--spotlight-opacity', '1');
-        e.currentTarget.style.setProperty('--ripple-scale', `${rippleScale}`);
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.setProperty('--spotlight-opacity', '0');
@@ -158,19 +148,18 @@ const Hero: React.FC = () => {
               }}
             />
 
-            {/* Spotlight Reveal Image (Grayscale + Ripple) */}
+            {/* Spotlight Reveal Image (Color) */}
             <img
               src={src}
-              alt={`Exhibition Preview ${i + 1}`}
-              className="absolute inset-0 w-full h-full object-cover opacity-95 grayscale pointer-events-none"
+              alt={`Exhibition Color Preview ${i + 1}`}
+              className="absolute inset-0 w-full h-full object-cover opacity-80 pointer-events-none"
               style={{
                 WebkitMaskImage: `radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)`,
                 maskImage: `radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)`,
                 opacity: `var(--spotlight-opacity, 0)`,
                 transform: 'translateZ(0)',
                 backfaceVisibility: 'hidden',
-                objectPosition: '80% 50%',
-                filter: 'url(#hero-water-filter)'
+                objectPosition: '80% 50%'
               }}
               loading="eager"
               decoding="async"
@@ -271,34 +260,6 @@ const Hero: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* 3. REFINED WATER RIPPLE FILTER */}
-      <svg className="hidden">
-        <filter id="hero-water-filter">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.02"
-            numOctaves="2"
-            result="noise"
-            seed="2"
-          >
-            <animate
-              attributeName="baseFrequency"
-              values="0.02;0.025;0.02"
-              dur="12s"
-              repeatCount="indefinite"
-            />
-          </feTurbulence>
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="noise"
-            scale="40"
-            style={{ scale: 'var(--ripple-scale, 40)' }}
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
-      </svg>
 
     </section>
   );

@@ -77,7 +77,7 @@ const WhatWeDo: React.FC = () => {
     }, { scope: containerRef });
 
     return (
-        <section id="what-we-do" className="bg-[#fcfcfc] py-16 lg:py-24 overflow-hidden" ref={containerRef}>
+        <section id="what-we-do" className="bg-[#fcfcfc] py-16 lg:pb-32 overflow-hidden" ref={containerRef}>
             <div className="container mx-auto px-6 lg:px-24 max-w-7xl">
 
                 {/* Header */}
@@ -98,10 +98,9 @@ const WhatWeDo: React.FC = () => {
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className="service-card group relative p-8 md:p-10 overflow-hidden bg-transparent border-r border-b border-black/5 transition-all duration-700 hover:bg-white aspect-auto min-h-[220px] md:aspect-[4/3] opacity-0"
-                            style={{ opacity: 0 }} // Hard fallback start state
+                            className="service-card group relative p-8 md:p-10 overflow-hidden bg-transparent border-r border-b border-black/5 transition-all duration-700 hover:bg-white min-h-[320px] flex flex-col will-change-transform"
                         >
-                            {/* Image Background (Subtle Reveal on Hover) */}
+                            {/* Image Background */}
                             <div className="absolute inset-0 z-0 transition-transform duration-1000 scale-110 group-hover:scale-100 pointer-events-none">
                                 <img
                                     src={service.image}
@@ -110,21 +109,21 @@ const WhatWeDo: React.FC = () => {
                                 />
                             </div>
 
-                            {/* Content */}
-                            <div className="relative z-10 w-full h-full flex flex-col justify-end text-left">
-                                <span className="text-[10px] font-black text-[#F58220] mb-4 opacity-100 transition-opacity tracking-widest">
+                            {/* Content - Removed justify-end for Safari stability */}
+                            <div className="relative z-10 flex-grow" /> {/* Spacer */}
+
+                            <div className="relative z-10 w-full text-left">
+                                <span className="text-[10px] font-black text-[#F58220] mb-3 block tracking-widest">
                                     SERVICE 0{i + 1}
                                 </span>
 
-                                <h3 className="text-2xl md:text-2xl font-bold text-[#1c1c1b] mb-4 tracking-tight transition-colors group-hover:text-[#F58220]">
+                                <h3 className="text-2xl font-bold text-[#1c1c1b] mb-4 tracking-tight transition-colors group-hover:text-[#F58220]">
                                     {service.title}
                                 </h3>
 
-                                <div className="transition-all duration-500">
-                                    <p className="text-black/60 text-sm md:text-xs font-light leading-relaxed max-w-[280px]">
-                                        {service.desc}
-                                    </p>
-                                </div>
+                                <p className="text-black/60 text-sm md:text-xs font-light leading-relaxed max-w-[280px]">
+                                    {service.desc}
+                                </p>
 
                                 {/* Arrow Icon */}
                                 <div className="absolute top-0 right-0 w-8 h-8 rounded-full border border-black/10 flex items-center justify-center opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">

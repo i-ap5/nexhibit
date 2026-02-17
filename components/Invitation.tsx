@@ -1,30 +1,63 @@
-
 import React from 'react';
+import { submitContactForm } from '../src/services/contact';
 
 const Invitation: React.FC = () => {
   const [formState, setFormState] = React.useState({
     name: '',
     email: '',
+    phone: '',
     organization: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
+  const [error, setError] = React.useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = () => {
+    if (!formState.name.trim()) return "Name is required";
+    if (!formState.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) return "Please enter a valid email";
+    if (!formState.phone.match(/^\+?[\d\s-]{8,}$/)) return "Please enter a valid phone number with country code";
+    if (!formState.message.trim()) return "Message is required";
+    return null;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
+
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setIsSubmitting(true);
-    // Simulate API call
-    setTimeout(() => {
+
+    try {
+      await submitContactForm({
+        name: formState.name,
+        email: formState.email,
+        phone: formState.phone,
+        organization: formState.organization,
+        message: formState.message
+      });
+
       setIsSubmitting(false);
       setIsSuccess(true);
-      setFormState({ name: '', email: '', organization: '', message: '' });
+      setFormState({ name: '', email: '', phone: '', organization: '', message: '' });
+
+      // Reset success message after 5 seconds
       setTimeout(() => setIsSuccess(false), 5000);
-    }, 1500);
+
+    } catch (err) {
+      setIsSubmitting(false);
+      setError("Something went wrong. Please try again.");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
+    if (error) setError('');
   };
 
   return (
@@ -53,12 +86,8 @@ const Invitation: React.FC = () => {
                 <a href="mailto:info@nexhibitarabia.com" className="text-2xl font-light hover:text-[#F58220] transition-colors">info@nexhibitarabia.com</a>
               </div>
               <div>
-                <span className="type-label text-[#F58220]/60 mb-2 block">Studio Line</span>
-                <p className="text-2xl font-light">+999 99 999 9999</p>
-              </div>
-              <div>
                 <span className="type-label text-[#F58220]/60 mb-2 block">Headquarters</span>
-                <p className="text-lg font-light text-black/60">Riyadh</p>
+                <p className="text-lg font-light text-black/60">Riyadh, Saudi Arabia</p>
               </div>
             </div>
           </div>
@@ -67,6 +96,7 @@ const Invitation: React.FC = () => {
           <div className="relative">
             <form onSubmit={handleSubmit} className="flex flex-col gap-10 pt-10">
 
+              {/* Name */}
               <div className="group relative">
                 <input
                   type="text"
@@ -77,11 +107,12 @@ const Invitation: React.FC = () => {
                   placeholder=" "
                   className="peer w-full bg-transparent border-b border-black/10 py-4 text-xl font-light focus:outline-none focus:border-[#F58220] transition-colors"
                 />
-                <label className="absolute left-0 top-4 text-black/30 text-lg font-light transition-all duration-300 pointer-events-none peer-focus:-translate-y-8 peer-focus:text-[10px] peer-focus:font-light peer-focus:text-[#F58220] peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-bold peer-[:not(:placeholder-shown)]:text-[#F58220]">
+                <label className="absolute left-0 top-4 text-black/30 text-lg font-light transition-all duration-300 pointer-events-none peer-focus:-translate-y-8 peer-focus:text-[10px] peer-focus:font-light peer-focus:text-[#F58220] peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]: peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-bold peer-[:not(:placeholder-shown)]:text-[#F58220]">
                   Your Name
                 </label>
               </div>
 
+              {/* Email */}
               <div className="group relative">
                 <input
                   type="email"
@@ -92,11 +123,28 @@ const Invitation: React.FC = () => {
                   placeholder=" "
                   className="peer w-full bg-transparent border-b border-black/10 py-4 text-xl font-light focus:outline-none focus:border-[#F58220] transition-colors"
                 />
-                <label className="absolute left-0 top-4 text-black/30 text-lg font-light transition-all duration-300 pointer-events-none peer-focus:-translate-y-8 peer-focus:text-[10px] peer-focus:font-light peer-focus:text-[#F58220] peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-bold peer-[:not(:placeholder-shown)]:text-[#F58220]">
+                <label className="absolute left-0 top-4 text-black/30 text-lg font-light transition-all duration-300 pointer-events-none peer-focus:-translate-y-8 peer-focus:text-[10px] peer-focus:font-light peer-focus:text-[#F58220] peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]: peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-bold peer-[:not(:placeholder-shown)]:text-[#F58220]">
                   Email Address
                 </label>
               </div>
 
+              {/* Phone with Country Code */}
+              <div className="group relative">
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formState.phone}
+                  onChange={handleChange}
+                  required
+                  placeholder=" "
+                  className="peer w-full bg-transparent border-b border-black/10 py-4 text-xl font-light focus:outline-none focus:border-[#F58220] transition-colors"
+                />
+                <label className="absolute left-0 top-4 text-black/30 text-lg font-light transition-all duration-300 pointer-events-none peer-focus:-translate-y-8 peer-focus:text-[10px] peer-focus:font-light peer-focus:text-[#F58220] peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]: peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-bold peer-[:not(:placeholder-shown)]:text-[#F58220]">
+                  Phone Number (e.g. +966...)
+                </label>
+              </div>
+
+              {/* Organization */}
               <div className="group relative">
                 <input
                   type="text"
@@ -106,11 +154,12 @@ const Invitation: React.FC = () => {
                   placeholder=" "
                   className="peer w-full bg-transparent border-b border-black/10 py-4 text-xl font-light focus:outline-none focus:border-[#F58220] transition-colors"
                 />
-                <label className="absolute left-0 top-4 text-black/30 text-lg font-light transition-all duration-300 pointer-events-none peer-focus:-translate-y-8 peer-focus:text-[10px] peer-focus:font-light peer-focus:text-[#F58220] peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-bold peer-[:not(:placeholder-shown)]:text-[#F58220]">
+                <label className="absolute left-0 top-4 text-black/30 text-lg font-light transition-all duration-300 pointer-events-none peer-focus:-translate-y-8 peer-focus:text-[10px] peer-focus:font-light peer-focus:text-[#F58220] peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]: peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-bold peer-[:not(:placeholder-shown)]:text-[#F58220]">
                   Company / Organization
                 </label>
               </div>
 
+              {/* Message */}
               <div className="group relative">
                 <textarea
                   name="message"
@@ -121,10 +170,30 @@ const Invitation: React.FC = () => {
                   rows={1}
                   className="peer w-full bg-transparent border-b border-black/10 py-4 text-xl font-light focus:outline-none focus:border-[#F58220] transition-colors resize-none min-h-[60px]"
                 />
-                <label className="absolute left-0 top-4 text-black/30 text-lg font-light transition-all duration-300 pointer-events-none peer-focus:-translate-y-8 peer-focus:text-[10px] peer-focus:font-light peer-focus:text-[#F58220] peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-bold peer-[:not(:placeholder-shown)]:text-[#F58220]">
+                <label className="absolute left-0 top-4 text-black/30 text-lg font-light transition-all duration-300 pointer-events-none peer-focus:-translate-y-8 peer-focus:text-[10px] peer-focus:font-light peer-focus:text-[#F58220] peer-[:not(:placeholder-shown)]:-translate-y-8 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]: peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-bold peer-[:not(:placeholder-shown)]:text-[#F58220]">
                   Tell us about your project
                 </label>
               </div>
+
+              {/* Error Message */}
+              {error && (
+                <div className="text-red-500 text-sm font-medium tracking-wide">
+                  {error}
+                </div>
+              )}
+
+              {/* Success Message Overlay */}
+              {isSuccess && (
+                <div className="absolute inset-0 bg-white/95 backdrop-blur-sm z-20 flex flex-col items-center justify-center text-center animate-in fade-in duration-500">
+                  <div className="w-16 h-16 bg-[#F58220] rounded-full flex items-center justify-center mb-6 shadow-lg shadow-[#F58220]/30">
+                    <svg viewBox="0 0 24 24" className="w-8 h-8 stroke-white fill-none stroke-[2.5]">
+                      <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <h3 className="text-2xl font-black text-[#1c1c1b] mb-2 tracking-tight">Message Sent</h3>
+                  <p className="text-black/50 text-sm font-light">We'll get back to you shortly.</p>
+                </div>
+              )}
 
               <div className="pt-8">
                 <button
@@ -133,16 +202,11 @@ const Invitation: React.FC = () => {
                 >
                   <div className="relative z-10 flex items-center justify-center gap-4">
                     <span className="type-label text-[11px] tracking-[0.3em] font-bold">
-                      {isSubmitting ? 'Sending...' : isSuccess ? 'Message Sent' : 'Send Inquiry'}
+                      {isSubmitting ? 'Sending...' : 'Send Inquiry'}
                     </span>
-                    {!isSubmitting && !isSuccess && (
+                    {!isSubmitting && (
                       <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current stroke-[2.5] transition-transform duration-500 group-hover:translate-x-1">
                         <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    )}
-                    {isSuccess && (
-                      <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current stroke-[2.5]">
-                        <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     )}
                   </div>

@@ -17,7 +17,7 @@ const Belief: React.FC = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="section-full bg-stone-50 flex items-center py-32 md:py-48 overflow-hidden relative">
+    <section ref={sectionRef} className="section-full bg-stone-50 flex items-center py-24 md:py-48 overflow-hidden relative">
       <div className="absolute top-0 right-0 p-12 lg:p-24 text-black/[0.02] font-extrabold text-[20vw] leading-none pointer-events-none select-none tracking-tighter hidden lg:block">
         Stalls
       </div>
@@ -31,7 +31,7 @@ const Belief: React.FC = () => {
             </h2>
           </div>
 
-          <div className={`hidden lg:block w-[1px] h-32 bg-black/5 mt-20 transition-all duration-[1.5s] delay-500 ${visible ? 'scale-y-100' : 'scale-y-0'}`} />
+          {/* <div className={`hidden lg:block w-[1px] h-32 bg-black/5 mt-20 transition-all duration-[1.5s] delay-500 ${visible ? 'scale-y-100' : 'scale-y-0'}`} /> */}
         </div>
 
         <div className="lg:col-span-7 flex flex-col justify-center">

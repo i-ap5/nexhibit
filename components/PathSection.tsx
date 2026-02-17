@@ -197,14 +197,14 @@ const PathSection: React.FC = () => {
         </div>
 
         {/* Content Stacking Context */}
-        <div className="flex-1 lg:pl-24 relative h-[60vh] w-full flex items-center justify-center lg:justify-start">
+        <div className="flex-1 lg:pl-24 relative h-[60vh] w-full flex items-center justify-start">
           {steps.map((step, i) => (
             <div
               key={i}
               ref={(el) => { stepsRef.current[i] = el }}
-              className="absolute inset-x-0 top-1/2 -translate-y-1/2 max-w-4xl text-center lg:text-left"
+              className="absolute inset-x-0 top-1/2 -translate-y-1/2 max-w-4xl text-left"
             >
-              <div className="flex items-center justify-center lg:justify-start gap-4 mb-8">
+              <div className="flex items-center justify-start gap-4 mb-8">
                 <span className="type-label text-[#F58220] tracking-[0.5em]">{step.phase}</span>
                 <div className="w-16 h-[1px] bg-white/10 hidden lg:block" />
               </div>
@@ -213,7 +213,7 @@ const PathSection: React.FC = () => {
                 {step.hook}
               </h3>
 
-              <p className="text-white/60 text-lg md:text-2xl font-light leading-relaxed max-w-2xl border-white/10 lg:border-l-2 lg:pl-8 mx-auto lg:mx-0">
+              <p className="text-white/60 text-lg md:text-2xl font-light leading-relaxed max-w-2xl border-white/10 border-l-2 pl-8 mx-0">
                 {step.desc}
               </p>
             </div>

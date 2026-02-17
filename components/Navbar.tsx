@@ -32,8 +32,10 @@ const Navbar: React.FC<NavbarProps> = ({
                 }
         pointer-events-none
       `}>
-                <div className="container mx-auto px-6 lg:px-24 flex items-center justify-between pointer-events-auto">
-                    <div className="flex-1 flex justify-start">
+                <div className={`
+                    flex items-center justify-between pointer-events-auto transition-all duration-700 ease-in-out
+                    ${isLightMode ? 'container md:mx-auto px-6 lg:px-24' : 'w-full px-6 lg:px-24'}
+                `}>                    <div className="flex-1 flex justify-start">
                         <Logo
                             mode={isLightMode ? 'light' : 'dark'}
                             className="transition-transform duration-500 hover:scale-105"
@@ -44,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = ({
                         {navLinks.map((link) => (
                             <a
                                 key={link.id}
-                                href={location.pathname === '/' ? `#${link.id}` : `/#${link.id}`}
+                                href={link.id === 'portfolio-link' ? '/portfolio' : (location.pathname === '/' ? `#${link.id}` : `/#${link.id}`)}
                                 className={`
                   flex items-center gap-2 group/link transition-all duration-500 hover:-translate-y-0.5
                   ${isLightMode ? 'text-black/40 hover:text-black' : 'text-white/40 hover:text-white'}
@@ -57,15 +59,17 @@ const Navbar: React.FC<NavbarProps> = ({
                     </nav>
 
                     <div className="flex-1 flex justify-end items-center gap-8">
-                        <button className={`
+                        <a
+                            href="#contact"
+                            className={`
               hidden sm:flex items-center gap-3 type-label px-10 py-3 rounded-full transition-all duration-500 text-[10px] font-bold tracking-wide group/btn overflow-hidden relative
               ${isLightMode
-                                ? 'bg-black text-white hover:bg-[#F58220] hover:-translate-y-1'
-                                : 'bg-white text-black hover:bg-[#F58220] hover:text-white hover:-translate-y-1 shadow-lg'
-                            }
+                                    ? 'bg-black text-white hover:bg-[#F58220] hover:-translate-y-1'
+                                    : 'bg-white text-black hover:bg-[#F58220] hover:text-white hover:-translate-y-1 shadow-lg'
+                                }
             `}>
                             <span className="relative z-10">Contact</span>
-                        </button>
+                        </a>
 
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -99,7 +103,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     {navLinks.map((link) => (
                         <a
                             key={link.id}
-                            href={`#${link.id}`}
+                            href={link.id === 'portfolio-link' ? '/portfolio' : `#${link.id}`}
                             onClick={() => setIsMenuOpen(false)}
                             className="group flex flex-col py-6 border-b border-black/[0.03]"
                         >
@@ -113,20 +117,10 @@ const Navbar: React.FC<NavbarProps> = ({
                 </div>
 
                 <div className="absolute bottom-12 left-0 w-full px-8 flex flex-col gap-10">
-                    <div className="flex flex-col gap-8 border-b border-black/[0.05] pb-10">
-                        <button
-                            onClick={() => {
-                                onExplorePortfolio();
-                                setIsMenuOpen(false);
-                            }}
-                            className="w-full py-5 rounded-full bg-black text-white type-label text-[10px] tracking-[0.4em] uppercase flex items-center justify-center gap-4 group/mobile-btn overflow-hidden relative transition-all duration-500 hover:bg-[#F58220]"
-                        >
-                            <span className="relative z-10">Explore Portfolio</span>
-                            <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current stroke-[2.5] relative z-10 transition-transform duration-500 group-hover/mobile-btn:translate-x-2" >
-                                <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                            <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover/mobile-btn:animate-[shimmer_2s_infinite] pointer-events-none" />
-                        </button>
+                    {/* Socials or other info can go here, or just keep it clean */}
+                    <div className="flex flex-col gap-4 border-t border-black/[0.05] pt-10">
+                        <p className="text-[10px] text-black/40 font-black tracking-widest uppercase">Inquiries</p>
+                        <a href="mailto:info@nexhibitarabia.com" className="text-lg font-light">info@nexhibitarabia.com</a>
                     </div>
                 </div>
             </div>

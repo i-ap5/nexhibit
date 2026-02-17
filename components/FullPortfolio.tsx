@@ -83,8 +83,8 @@ const FullPortfolio: React.FC<FullPortfolioProps> = ({ onBack }) => {
                             <div className="mt-8 flex flex-col gap-1.5">
                                 <div className="flex items-center justify-between gap-3">
                                     <div className="flex items-center gap-3">
-                                        <span className="text-[#F58220] text-[10px] font-black tracking-widest">WORK {i < 9 ? `0${i + 1}` : i + 1}</span>
-                                        <div className="h-[4px] w-[1px] bg-black/10" />
+                                        {/* <span className="text-[#F58220] text-[10px] font-black tracking-widest">WORK {i < 9 ? `0${i + 1}` : i + 1}</span> */}
+                                        {/* <div className="h-[4px] w-[1px] bg-black/10" /> */}
                                         <span className="text-[8px] font-bold text-black/30 uppercase tracking-widest">
                                             {project.date}
                                         </span>

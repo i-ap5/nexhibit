@@ -172,7 +172,7 @@ const Hero: React.FC<HeroProps> = ({ onExplore }) => {
       </div>
 
       {/* 2. TEXT CONTENT SECTION (Overlay) */}
-      <div className="w-full px-8 lg:px-24 relative z-30 pt-20">
+      <div className="w-full px-6 lg:px-24 relative z-30 pt-20">
 
         {/* Animated Entry Wrapper */}
         <div className={`transition-all duration-1000 ease-out max-w-3xl ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
@@ -236,7 +236,7 @@ const Hero: React.FC<HeroProps> = ({ onExplore }) => {
       </div>
 
       {/* Bottom Status / Scroll Indicator */}
-      <div className="absolute bottom-10 left-6 lg:left-12 flex items-center justify-between w-[calc(100%-3rem)] lg:w-[calc(100%-6rem)] z-40 pointer-events-none text-white/50 mix-blend-screen">
+      <div className="absolute bottom-10 left-6 lg:left-24 flex items-center justify-between w-[calc(100%-3rem)] lg:w-[calc(100%-12rem)] z-40 pointer-events-none text-white/50 mix-blend-screen">
         <div className="flex items-center gap-4">
           {/* <span className="type-label text-[9px] tracking-widest -rotate-90 origin-left translate-y-[2px]">SCROLL</span>
           <div className=" w-[1px] h-12 bg-white/50 animate-bounce" /> */}

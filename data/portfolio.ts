@@ -20,7 +20,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Feb 8 - 12",
         isFlagship: false,
-        image: "/assets/nexh1.webp"
+        image: "/assets/portfolioAssets/ADS.webp"
     },
     {
         id: "ali-reza-swpc",
@@ -31,7 +31,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Nov 2-3",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Al Reza 1.webp"
     },
     {
         id: "ali-reza-logistics",
@@ -42,7 +42,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "dec 15-16",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Al Reza.webp"
     },
     {
         id: "all-view-2026",
@@ -53,7 +53,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Feb 8 - 12",
         isFlagship: false,
-        image: "/assets/nexh2.webp"
+        image: "/assets/portfolioAssets/All View.webp"
     },
     {
         id: "bahce-index",
@@ -64,7 +64,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Sep 9 - Sep 11 2026",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Bahse.webp"
     },
     {
         id: "cyg-sesime",
@@ -75,19 +75,19 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "sep 17-18",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/CYG.webp"
     },
-    {
-        id: "epk-stand",
-        heading: "EPK Modular Stand",
-        description: "Modular exhibition booth design focus on clean lines and technical excellence.",
-        expo: "Exhibition 2025",
-        venue: "RICEC",
-        client: "",
-        date: "October 2025",
-        isFlagship: false,
-        image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2070&auto=format&fit=crop"
-    },
+    // {
+    //     id: "epk-stand",
+    //     heading: "EPK Modular Stand",
+    //     description: "Modular exhibition booth design focus on clean lines and technical excellence.",
+    //     expo: "Exhibition 2025",
+    //     venue: "RICEC",
+    //     client: "",
+    //     date: "October 2025",
+    //     isFlagship: false,
+    //     image: "/assets/portfolioAssets/EPK.webp"
+    // },
     {
         id: "hanchu-solar",
         heading: "Hanchu Energy Pavilion",
@@ -97,7 +97,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "oct 12-14",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Hanchu.webp"
     },
     {
         id: "hennissy-homelife",
@@ -108,7 +108,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "dec 22-24",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1540575861501-7ad0582373f2?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Hennisy.webp"
     },
     {
         id: "kotrong-solar",
@@ -119,18 +119,18 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "oct 12-14",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Kotrong.webp"
     },
     {
-        id: "leb00-global-health",
-        heading: "Leb00 Medical Showcase",
+        id: "leboo-global-health",
+        heading: "Leboo Medical Showcase",
         description: "Clinical aesthetics and sterile design principles defined this medical protective-wear showcase. The pavilion prioritized product safety standards and hygiene-focused displays for healthcare visitors.",
         expo: "Global Health Exhibition 2025",
         venue: "Riyadh Exhibition and Convention Centre, Malham",
         client: "",
         date: "oct 27-30",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Leboo.webp"
     },
     {
         id: "lumi-event-show",
@@ -141,7 +141,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "sep 17-18",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Lumi.webp"
     },
     {
         id: "lumi2-made-in-saudi",
@@ -152,7 +152,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "DEC 15-17",
         isFlagship: true,
-        image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Lumi1.webp"
     },
     {
         id: "lumi3-made-in-saudi",
@@ -163,18 +163,18 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "dec 15-17",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Lumi2.webp"
     },
     {
         id: "made-in-china-index",
-        heading: "Global Manufacturing Gateway",
+        heading: "Made in China",
         description: "Massive, multi-pavilion logistics met international manufacturing scale here. This global sourcing gateway facilitated high-volume trade, successfully connecting international vendors with the Kingdom’s largest commercial buyers.",
         expo: "INDEX 2025",
         venue: "Riyadh Front Convention Centre",
         client: "",
         date: "Sep 9 - Sep 11 2025",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Made In China.webp"
     },
     {
         id: "myande-agriculture",
@@ -185,7 +185,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "oct 20-23",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1540575861501-7ad0582373f2?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Myande.webp"
     },
     {
         id: "nournet-black-hat",
@@ -196,7 +196,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "dec 2-4",
         isFlagship: true,
-        image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Nournet.webp"
     },
     {
         id: "ntech-ifat",
@@ -207,7 +207,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "jan 26-28",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Ntech.webp"
     },
     {
         id: "poongsan-wds",
@@ -218,7 +218,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Feb 8 - 12",
         isFlagship: true,
-        image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Poongsan.webp"
     },
     {
         id: "reading-china-book-fair",
@@ -229,7 +229,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Oct 2-11",
         isFlagship: true,
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Reading China.webp"
     },
     {
         id: "sette-index",
@@ -240,7 +240,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Sep 9 - Sep 11 2027",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Sette.webp"
     },
     {
         id: "sfs-horeca",
@@ -251,7 +251,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "dec 15-17",
         isFlagship: true,
-        image: "https://images.unsplash.com/photo-1540575861501-7ad0582373f2?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/SFS.webp"
     },
     {
         id: "siafa-date-world",
@@ -262,7 +262,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "nov 24 - dec 4",
         isFlagship: true,
-        image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Siafa.webp"
     },
     {
         id: "siafa-made-in-saudi",
@@ -273,7 +273,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "dec 15-17",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Siafa.webp"
     },
     {
         id: "silqfi-money-2020",
@@ -284,7 +284,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "sep 15-17",
         isFlagship: true,
-        image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Silqfi.webp"
     },
     {
         id: "spire-black-hat",
@@ -295,7 +295,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "dec 2-4",
         isFlagship: true,
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Spire.webp"
     },
     {
         id: "sunket-solar",
@@ -306,7 +306,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "oct12-14",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Sunket.webp"
     },
     {
         id: "tajeer-biban",
@@ -317,7 +317,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Nov 5-8",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1540575861501-7ad0582373f2?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Tajeer.webp"
     },
     {
         id: "tibox-elenex",
@@ -328,7 +328,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Oct 6 - Oct 8 2025",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Tibox.webp"
     },
     {
         id: "vitzrocell-wds",
@@ -339,7 +339,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Feb 8 - 12",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Vitzro.webp"
     },
     {
         id: "vontron-water-expo",
@@ -350,7 +350,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Sep 2 - Sep 4 2025",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Vontron.webp"
     },
     {
         id: "vontron-ifat",
@@ -361,7 +361,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "jan 26-28",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Vontron1.webp"
     },
     {
         id: "yeflee-wds",
@@ -372,7 +372,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "Feb 8 - 12",
         isFlagship: false,
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Yeefly.webp"
     },
     {
         id: "zahrawi-global-health",
@@ -383,6 +383,6 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "oct 27-30",
         isFlagship: true,
-        image: "https://images.unsplash.com/photo-1540575861501-7ad0582373f2?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/portfolioAssets/Zahrawi.webp"
     }
 ];

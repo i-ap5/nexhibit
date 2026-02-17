@@ -87,10 +87,10 @@ const App: React.FC = () => {
   }, [location.pathname]);
 
   const navLinks = [
-    { name: 'About', id: 'about' },
     { name: 'Services', id: 'services' },
     { name: 'Process', id: 'process' },
     { name: 'Works', id: 'works' },
+    { name: 'Portfolio', id: 'portfolio-link' }, // Special ID for routing if needed, or link to /portfolio
   ];
 
   const handlePortfolioView = useCallback(() => {

@@ -114,7 +114,7 @@ const WhatWeDo: React.FC = () => {
 
                             <div className="relative z-10 w-full text-left">
                                 <span className="text-[10px] font-black text-[#F58220] mb-3 block tracking-widest">
-                                    SERVICE 0{i + 1}
+                                    0{i + 1}
                                 </span>
 
                                 <h3 className="text-2xl font-bold text-[#1c1c1b] mb-4 tracking-tight transition-colors group-hover:text-[#F58220]">

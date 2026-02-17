@@ -114,20 +114,20 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0 z-10 pointer-events-none opacity-60">
         <LiquidEther
           colors={['#FFFFFF', '#FFFFFF', '#FFFFFF']}
-          mouseForce={20}
-          cursorSize={100}
+          mouseForce={15}
+          cursorSize={80}
           isViscous
-          viscous={30}
-          iterationsViscous={32}
-          iterationsPoisson={32}
-          resolution={0.5}
+          viscous={25}
+          iterationsViscous={16}
+          iterationsPoisson={16}
+          resolution={0.4}
           isBounce={false}
           autoDemo
-          autoSpeed={0.5}
-          autoIntensity={2.2}
-          takeoverDuration={0.25}
-          autoResumeDelay={3000}
-          autoRampDuration={0.6}
+          autoSpeed={0.4}
+          autoIntensity={2.0}
+          takeoverDuration={0.3}
+          autoResumeDelay={2000}
+          autoRampDuration={1.0}
         />
       </div>
 
@@ -256,33 +256,6 @@ const Hero: React.FC = () => {
         </div>
       </div>
 
-      {/* 3. REFINED WATER RIPPLE FILTER */}
-      <svg className="hidden">
-        <filter id="hero-water-filter">
-          <feTurbulence
-            type="fractalNoise"
-            baseFrequency="0.02"
-            numOctaves="2"
-            result="noise"
-            seed="2"
-          >
-            <animate
-              attributeName="baseFrequency"
-              values="0.02;0.025;0.02"
-              dur="12s"
-              repeatCount="indefinite"
-            />
-          </feTurbulence>
-          <feDisplacementMap
-            in="SourceGraphic"
-            in2="noise"
-            scale="40"
-            style={{ scale: 'var(--ripple-scale, 40)' }}
-            xChannelSelector="R"
-            yChannelSelector="G"
-          />
-        </filter>
-      </svg>
 
     </section>
   );

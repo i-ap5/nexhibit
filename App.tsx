@@ -5,7 +5,6 @@ import Belief from './components/Belief';
 import Process from './components/Process';
 import PathSection from './components/PathSection';
 import Portfolio from './components/Portfolio';
-import Services from './components/Services';
 import WhatWeDo from './components/WhatWeDo';
 import MissionVision from './components/MissionVision';
 import Invitation from './components/Invitation';
@@ -58,9 +57,19 @@ const App: React.FC = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('mousemove', handleMouseMove);
 
+    // Global ScrollTrigger Refresh to fix "missing sections" on first load
+    const refreshTimeout = setTimeout(() => {
+      if (typeof window !== 'undefined' && (window as any).gsap) {
+        import('gsap/dist/ScrollTrigger').then(({ ScrollTrigger }) => {
+          ScrollTrigger.refresh();
+        });
+      }
+    }, 1000);
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
+      clearTimeout(refreshTimeout);
       observer.disconnect();
     };
   }, []);

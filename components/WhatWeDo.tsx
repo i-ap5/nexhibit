@@ -1,7 +1,11 @@
-
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 const services = [
     {
@@ -40,17 +44,36 @@ const WhatWeDo: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        gsap.from(".service-card", {
-            y: 100,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.1,
-            ease: "power4.out",
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: "top 80%",
+        // Essential: Refresh ScrollTrigger when this component mounts 
+        // to ensure it calculates positions correctly even if the page layout changes
+        const refreshId = setTimeout(() => ScrollTrigger.refresh(), 500);
+
+        // Initial state - ensures they start hidden
+        gsap.set(".service-card", { y: 40, opacity: 0 });
+
+        const trigger = ScrollTrigger.create({
+            trigger: containerRef.current,
+            start: "top 85%",
+            onEnter: () => {
+                gsap.to(".service-card", {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.8,
+                    stagger: 0.05,
+                    ease: "power2.out",
+                    overwrite: "auto"
+                });
+            },
+            // Fallback: If user scrolls back up, ensure they stay visible or re-animate
+            onEnterBack: () => {
+                gsap.to(".service-card", { opacity: 1, y: 0, overwrite: "auto" });
             }
         });
+
+        return () => {
+            clearTimeout(refreshId);
+            trigger.kill();
+        };
     }, { scope: containerRef });
 
     return (
@@ -75,7 +98,8 @@ const WhatWeDo: React.FC = () => {
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className="service-card group relative p-8 md:p-10 overflow-hidden bg-transparent border-r border-b border-black/5 transition-all duration-700 hover:bg-white aspect-auto min-h-[220px] md:aspect-[4/3]"
+                            className="service-card group relative p-8 md:p-10 overflow-hidden bg-transparent border-r border-b border-black/5 transition-all duration-700 hover:bg-white aspect-auto min-h-[220px] md:aspect-[4/3] opacity-0"
+                            style={{ opacity: 0 }} // Hard fallback start state
                         >
                             {/* Image Background (Subtle Reveal on Hover) */}
                             <div className="absolute inset-0 z-0 transition-transform duration-1000 scale-110 group-hover:scale-100 pointer-events-none">
@@ -121,4 +145,4 @@ const WhatWeDo: React.FC = () => {
     );
 };
 
-export default WhatWeDo;
+export default React.memo(WhatWeDo);

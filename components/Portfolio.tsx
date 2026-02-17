@@ -80,6 +80,26 @@ const Portfolio: React.FC<PortfolioProps> = ({ onViewAll }) => {
         </div>
 
 
+        {/* Bottom CTA for more friction-less navigation */}
+        <div className="mt-24 flex justify-center">
+          <button
+            onClick={onViewAll}
+            className="group flex flex-col items-center gap-4 transition-all duration-300"
+          >
+            <div className="relative w-16 h-16 rounded-full border border-black/10 flex items-center justify-center transition-all duration-500 group-hover:bg-[#F58220] group-hover:border-[#F58220]">
+              <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-[#1c1c1b] stroke-[1.5] transition-all duration-500 group-hover:stroke-white -rotate-45 group-hover:rotate-0" >
+                <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+
+              {/* Outer Pulse Effect */}
+              <div className="absolute inset-0 rounded-full border border-[#F58220] scale-100 opacity-0 group-hover:scale-150 group-hover:opacity-0 transition-all duration-700" />
+            </div>
+
+            <span className="type-label text-[10px] text-black/40 group-hover:text-black tracking-[0.2em]">
+              View Full Portfolio
+            </span>
+          </button>
+        </div>
       </div>
     </section>
   );

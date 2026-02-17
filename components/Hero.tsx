@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import LiquidEther from './LiquidEther';
 
 const images = [
   '/assets/nexh1.webp',
@@ -107,27 +108,28 @@ const Hero: React.FC = () => {
 
   return (
     <section
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        // Calculate velocity for ripple intensity
-        const dx = e.movementX;
-        const dy = e.movementY;
-        const velocity = Math.sqrt(dx * dx + dy * dy);
-        const rippleScale = Math.min(20 + velocity * 2, 60);
-
-        e.currentTarget.style.setProperty('--mouse-x', `${x}px`);
-        e.currentTarget.style.setProperty('--mouse-y', `${y}px`);
-        e.currentTarget.style.setProperty('--spotlight-opacity', '1');
-        e.currentTarget.style.setProperty('--ripple-scale', `${rippleScale}`);
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.setProperty('--spotlight-opacity', '0');
-      }}
       className="relative min-h-screen w-full overflow-hidden bg-[#080808] flex items-center group cursor-none md:cursor-default"
     >
+      {/* BACKGROUND ANIMATION LAYER */}
+      <div className="absolute inset-0 z-10 pointer-events-none opacity-60">
+        <LiquidEther
+          colors={['#FFFFFF', '#FFFFFF', '#FFFFFF']}
+          mouseForce={20}
+          cursorSize={100}
+          isViscous
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.5}
+          isBounce={false}
+          autoDemo
+          autoSpeed={0.5}
+          autoIntensity={2.2}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+        />
+      </div>
 
       {/* 1. SEAMLESS IMAGE SLIDESHOW */}
       <div className="absolute inset-0 z-0">
@@ -156,24 +158,6 @@ const Hero: React.FC = () => {
                 backfaceVisibility: 'hidden',
                 objectPosition: '80% 50%'
               }}
-            />
-
-            {/* Spotlight Reveal Image (Grayscale + Ripple) */}
-            <img
-              src={src}
-              alt={`Exhibition Preview ${i + 1}`}
-              className="absolute inset-0 w-full h-full object-cover opacity-95 grayscale pointer-events-none"
-              style={{
-                WebkitMaskImage: `radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)`,
-                maskImage: `radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)`,
-                opacity: `var(--spotlight-opacity, 0)`,
-                transform: 'translateZ(0)',
-                backfaceVisibility: 'hidden',
-                objectPosition: '80% 50%',
-                filter: 'url(#hero-water-filter)'
-              }}
-              loading="eager"
-              decoding="async"
             />
           </div>
         ))}

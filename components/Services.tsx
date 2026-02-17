@@ -1,5 +1,5 @@
 
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
 const capabilities = [
   {
@@ -34,142 +34,58 @@ const capabilities = [
   }
 ];
 
-const CapabilityItem = ({ item, index, activeIndices }: { item: typeof capabilities[0], index: number, activeIndices: number[] }) => {
-  const isActive = activeIndices.includes(index);
-
-  return (
-    <div
-      className={`py-12 border-b border-black/5 transition-all duration-700 flex flex-col gap-4
-        ${isActive ? 'opacity-100' : 'opacity-10'}`}
-    >
-      <div className="flex items-center gap-6">
-        <span className={`type-label text-[10px] font-black transition-colors duration-700 ${isActive ? 'text-[#F58220]' : 'text-black/20'}`}>
-          0{index + 1}
-        </span>
-        <h3 className={`text-3xl md:text-5xl font-extrabold tracking-tighter transition-colors duration-700 leading-none
-          ${isActive ? 'text-[#1c1c1b]' : 'text-black/20'}`}>
-          {item.title}
-        </h3>
-      </div>
-      <p className={`text-base md:text-lg font-light leading-relaxed max-w-xl pl-12 md:pl-20 transition-all duration-700 ${isActive ? 'text-black/60 max-h-40 opacity-100 mt-2' : 'max-h-0 opacity-0 overflow-hidden'}`}>
-        {item.desc}
-      </p>
-
-      <div className={`h-[1px] bg-[#F58220] transition-all duration-700 ease-out ${isActive ? 'w-40 mt-4' : 'w-0'}`} />
-    </div>
-  );
-};
-
 const Services: React.FC = () => {
-  const [activeIndices, setActiveIndices] = useState<number[]>([0]);
-  const primaryIndex = activeIndices[0] ?? 0;
-  const containerRef = useRef<HTMLDivElement>(null);
-  const itemsRef = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const observers = itemsRef.current.map((item, index) => {
-      if (!item) return null;
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting && entry.intersectionRatio > 0.3) {
-              setActiveIndices(prev => prev.includes(index) ? prev : [...prev, index].sort((a, b) => a - b));
-            } else {
-              setActiveIndices(prev => prev.filter(i => i !== index));
-            }
-          });
-        },
-        {
-          root: null,
-          threshold: [0, 0.3, 0.6, 1.0],
-          rootMargin: "-10% 0px -10% 0px"
-        }
-      );
-
-      observer.observe(item);
-      return observer;
-    });
-
-    return () => {
-      observers.forEach(o => o?.disconnect());
-    };
-  }, []);
-
   return (
-    <section id="services" className="bg-white relative">
-      <div className="container mx-auto px-6 lg:px-24">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 relative">
+    <section id="services" className="bg-[#fcfcfc] py-12 lg:py-16 relative">
+      <div className="container mx-auto px-6 lg:px-24 max-w-7xl">
 
-          {/* Sticky Left Sidebar - Bounded to Parent Grid */}
-          <div className="lg:col-span-12 xl:col-span-5 h-fit lg:sticky lg:top-24 py-8 z-20">
-            <div className="transition-all duration-1000">
+        {/* Header */}
+        <div className="mb-8 text-center lg:text-left">
+          <span className="type-label text-[#F58220] block mb-3 px-1 border-l-2 border-[#F58220] ml-0 inline-block uppercase tracking-widest font-black text-[8px]">Capabilities</span>
+          <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-[#1c1c1b] leading-[0.85]">
+            What we <br /> <span className="text-black/10">deliver.</span>
+          </h2>
+          <p className="text-black/40 text-sm md:text-base font-light max-w-xl mt-4 leading-relaxed">
+            A comprehensive suite of production and management services engineered to elevate your brand's physical presence.
+          </p>
+        </div>
 
-              {/* Dynamic Image Window */}
-              <div className="aspect-[21/9] w-full mb-6 overflow-hidden rounded-sm relative border border-black/5 bg-stone-100 group shadow-sm">
-                <div className="absolute inset-0 bg-blueprint opacity-[0.03] z-10 pointer-events-none" />
-                {capabilities.map((cap, i) => (
-                  <img
-                    key={i}
-                    src={cap.image}
-                    alt={cap.title}
-                    className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)]
-                      ${i === primaryIndex ? 'opacity-100 scale-100 rotate-0' : 'opacity-0 scale-105 rotate-0'}`}
-                    style={{ willChange: 'opacity, transform' }}
-                  />
-                ))}
+        {/* 3x2 Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border-t border-l border-black/5">
+          {capabilities.map((item, i) => (
+            <div
+              key={i}
+              className="group relative p-6 lg:p-8 border-r border-b border-black/5 hover:bg-white transition-all duration-500 overflow-hidden"
+            >
+              <div className="relative z-10 h-full flex flex-col">
+                <span className="text-[9px] font-black text-[#F58220] mb-4 block tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">
+                  0{i + 1}
+                </span>
 
-                {/* Visual Metadata Overlay */}
-                <div className="absolute inset-x-0 bottom-0 p-4 flex justify-end items-end z-20">
-                  <span className="type-label text-[6px] text-white/30 font-mono tracking-tighter">MTRX_{primaryIndex + 1} //</span>
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight text-[#1c1c1b] mb-4 leading-tight group-hover:text-[#F58220] transition-colors">
+                  {item.title}
+                </h3>
+
+                <p className="text-black/50 text-sm font-light leading-relaxed mb-8">
+                  {item.desc}
+                </p>
+
+                {/* Optional: Small Image Reveal on Hover or consistently present? 
+                    User asked for "in a box", simple text is usually cleaner for this request. 
+                    Let's add a subtle background image hint. */}
+                <div className="mt-auto pt-4">
+                  <div className="w-12 h-[2px] bg-black/5 group-hover:w-full group-hover:bg-[#F58220]/20 transition-all duration-700" />
                 </div>
               </div>
 
-              <span className="type-label text-[#F58220] block mb-6">Core Capabilities</span>
-              <h2 className="text-5xl md:text-6xl font-extrabold tracking-tighter text-[#1c1c1b] leading-[0.85] mb-8">
-                What we <br /> <span className="text-black/10">deliver.</span>
-              </h2>
-              <p className="text-black/40 font-light text-sm lg:text-base max-w-sm leading-relaxed mb-8">
-                A comprehensive suite of production and management services engineered to elevate your brand's physical presence.
-              </p>
-
-              {/* Progress Indicators & Legend */}
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-2">
-                  {capabilities.map((_, i) => (
-                    <div
-                      key={i}
-                      className={`h-[2px] transition-all duration-500 rounded-full ${activeIndices.includes(i) ? 'w-10 bg-[#F58220]' : 'w-2 bg-black/10'}`}
-                    />
-                  ))}
-                </div>
-                <div className="flex flex-col gap-1">
-                  <span className="type-label text-[10px] text-[#F58220] transition-all duration-500 font-black uppercase tracking-widest">
-                    {capabilities[primaryIndex].title}
-                  </span>
-                </div>
+              {/* Subtle background image hint */}
+              <div className="absolute top-0 right-0 w-full h-full opacity-0 group-hover:opacity-[0.03] transition-opacity duration-1000 pointer-events-none">
+                <img src={item.image} alt="" className="w-full h-full object-cover grayscale scale-110 group-hover:scale-100 transition-transform duration-[2000ms]" />
               </div>
             </div>
-          </div>
-
-          {/* Scrollable Right Content - Stacked Layout */}
-          <div ref={containerRef} className="lg:col-span-7 flex flex-col pb-[50vh]">
-            {capabilities.map((item, i) => (
-              <div
-                key={i}
-                ref={(el) => { if (el) itemsRef.current[i] = el; }}
-                className="w-full"
-              >
-                <CapabilityItem
-                  item={item}
-                  index={i}
-                  activeIndices={activeIndices}
-                />
-              </div>
-            ))}
-          </div>
-
+          ))}
         </div>
+
       </div>
     </section>
   );

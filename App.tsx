@@ -6,6 +6,7 @@ import Process from './components/Process';
 import PathSection from './components/PathSection';
 import Portfolio from './components/Portfolio';
 import Services from './components/Services';
+import WhatWeDo from './components/WhatWeDo';
 import MissionVision from './components/MissionVision';
 import Invitation from './components/Invitation';
 import CustomCursor from './components/CustomCursor';
@@ -202,8 +203,8 @@ const App: React.FC = () => {
             <Belief />
           </div>
 
-          <div className="relative z-20">
-            <Services />
+          <div id="services" className="relative z-20">
+            <WhatWeDo />
           </div>
 
           <div id="path" className="relative z-30">

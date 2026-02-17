@@ -17,7 +17,11 @@ const images = [
 // Safe "Rapid Intro" speed ramp (Fast start, cinematic finish)
 const durations = [600, 600, 600, 800, 3000, 5000, 5000, 5000];
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onExplore?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onExplore }) => {
   const [loaded, setLoaded] = useState(false);
   const [index, setIndex] = useState(0);
   const slidesRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -200,7 +204,7 @@ const Hero: React.FC = () => {
               {/* CSS Orbiting Border (White) */}
               <div className="absolute inset-[-100%] animate-[border-flow_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0%,white_25%,transparent_50%)]" />
 
-              <div className="relative flex items-center justify-center gap-6 px-10 py-4 rounded-full bg-[#F58220] text-white w-full h-full z-10 overflow-hidden group-hover:bg-[#ff8e36] transition-colors duration-500">
+              <div className="relative flex items-center justify-center gap-6 px-10 py-4.5 rounded-full bg-[#F58220] text-white w-full h-full z-10 overflow-hidden group-hover:bg-[#ff8e36] transition-colors duration-500">
                 <span className="type-label text-[11px] font-bold tracking-[0.05em] transition-transform duration-500 group-hover:-translate-x-1">
                   Start project
                 </span>
@@ -213,7 +217,10 @@ const Hero: React.FC = () => {
             </button>
 
             {/* Secondary: Explore works */}
-            <button className="w-full sm:w-auto group relative flex items-center justify-center gap-3 px-10 py-4.5 rounded-full bg-white/5 backdrop-blur-md text-white border border-white/10 transition-all duration-500 hover:-translate-y-1 hover:bg-white/10 shadow-lg">
+            <button
+              onClick={onExplore}
+              className="w-full sm:w-auto group relative flex items-center justify-center gap-3 px-10 py-4.5 rounded-full bg-white/5 backdrop-blur-md text-white border border-white/10 transition-all duration-500 hover:-translate-y-1 hover:bg-white/10 shadow-lg"
+            >
               <span className="type-label text-[11px] font-bold tracking-[0.05em] transition-transform duration-500 group-hover:-translate-x-2">
                 Explore works
               </span>

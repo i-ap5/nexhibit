@@ -89,8 +89,20 @@ const Process: React.FC = () => {
         const container = containerRef.current;
         const scrollTrack = scrollContainerRef.current;
 
-        // Calculate scroll length: total track width minus visible window width
-        const getScrollAmount = () => -(scrollTrack.scrollWidth - window.innerWidth + 100);
+        // Calculate scroll length with robust start position detection
+        const getScrollAmount = () => {
+            const trackWidth = scrollTrack.scrollWidth;
+            const parentStyle = window.getComputedStyle(scrollTrack.parentElement as Element);
+            const parentPaddingLeft = parseFloat(parentStyle.paddingLeft);
+            const parentLeft = (scrollTrack.parentElement as Element).getBoundingClientRect().left;
+
+            // Initial visual left position of the track (container left + its padding)
+            const startX = parentLeft + parentPaddingLeft;
+
+            // Move left by (TotalWidth + 2*StartOffset - ViewportWidth)
+            // This ensures the final card ends at the same right-padding as the start
+            return -(trackWidth + (2 * startX) - window.innerWidth);
+        };
 
         gsap.to(scrollTrack, {
             x: getScrollAmount,
@@ -115,59 +127,65 @@ const Process: React.FC = () => {
                 <div className="absolute inset-0 bg-[url('https://res.cloudinary.com/dm2vi7uup/image/upload/v1739814400/grid-pattern_p80g96.png')] bg-repeat" />
             </div>
 
-            <div className="container mx-auto px-8 mb-12 relative z-10 transition-transform duration-500">
-                <span className="type-label text-[#F58220] tracking-widest uppercase block mb-2 text-xs">Workflow</span>
-                <h2 className="text-4xl md:text-5xl font-black tracking-tight">How we work</h2>
+            <div className="container mx-auto px-6 lg:px-24 mb-16 relative z-10 transition-transform duration-500">
+                <div className="max-w-2xl">
+                    <span className="type-label text-[#F58220] block mb-3 uppercase tracking-widest font-black text-[8px]">Workflow</span>
+                    <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white leading-[0.85]">
+                        How we <br /> <span className="text-white/10">work.</span>
+                    </h2>
+                </div>
             </div>
 
             {/* Horizontal Scroll Track */}
-            <div
-                ref={scrollContainerRef}
-                className="flex gap-6 lg:gap-8 px-8 lg:px-24 w-max relative z-10 items-center h-auto"
-                style={{ willChange: 'transform' }}
-            >
-                {processSteps.map((step, index) => (
-                    <React.Fragment key={index}>
-                        <div className="process-card w-[280px] md:w-[320px] flex-shrink-0">
-                            <div className="h-[240px] flex flex-col p-8 bg-[#141413] border border-white/5 border-t-white/10 transition-all duration-500 hover:border-[#F58220]/40 group relative overflow-hidden">
-                                {/* Watermark */}
-                                <span className="absolute top-6 right-6 text-3xl font-black text-white/5 group-hover:text-[#F58220]/10 transition-colors duration-500 select-none">
-                                    {step.id}
-                                </span>
-
-                                {/* Icon */}
-                                <div className="w-10 h-10 text-[#F58220] mb-8 transition-transform duration-500 group-hover:scale-110">
-                                    {step.icon}
-                                </div>
-
-                                {/* Text */}
-                                <div className="mt-auto">
-                                    <span className="type-label text-white/30 tracking-[0.2em] text-[9px] mb-2 block uppercase font-bold">
-                                        {step.subtitle}
+            <div className="container mx-auto px-6 lg:px-24 w-full">
+                <div
+                    ref={scrollContainerRef}
+                    className="flex gap-2 lg:gap-3 w-max relative z-10 items-center h-auto"
+                    style={{ willChange: 'transform' }}
+                >
+                    {processSteps.map((step, index) => (
+                        <React.Fragment key={index}>
+                            <div className="process-card w-[280px] md:w-[320px] flex-shrink-0">
+                                <div className="h-[240px] flex flex-col p-8 bg-[#141413] border border-white/5 border-t-white/10 transition-all duration-500 hover:border-[#F58220]/40 group relative overflow-hidden">
+                                    {/* Watermark */}
+                                    <span className="absolute top-6 right-6 text-3xl font-black text-white/5 group-hover:text-[#F58220]/10 transition-colors duration-500 select-none">
+                                        {step.id}
                                     </span>
-                                    <h3 className="text-xl md:text-2xl font-bold mb-4 tracking-tight">
-                                        {step.title}
-                                    </h3>
-                                    <p className="text-white/50 text-sm leading-relaxed font-light">
-                                        {step.desc}
-                                    </p>
+
+                                    {/* Icon */}
+                                    <div className="w-10 h-10 text-[#F58220] mb-8 transition-transform duration-500 group-hover:scale-110">
+                                        {step.icon}
+                                    </div>
+
+                                    {/* Text */}
+                                    <div className="mt-auto">
+                                        <span className="type-label text-white/30 tracking-[0.2em] text-[9px] mb-2 block uppercase font-bold">
+                                            {step.subtitle}
+                                        </span>
+                                        <h3 className="text-xl md:text-2xl font-bold mb-4 tracking-tight">
+                                            {step.title}
+                                        </h3>
+                                        <p className="text-white/50 text-sm leading-relaxed font-light">
+                                            {step.desc}
+                                        </p>
+                                    </div>
+
+                                    {/* Hover Line */}
+                                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F58220] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                                 </div>
-
-                                {/* Hover Line */}
-                                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F58220] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
                             </div>
-                        </div>
 
-                        {/* Connection Arrow - Pulsing Chevron */}
-                        {index < processSteps.length - 1 && (
-                            <div className="flex-shrink-0 text-[#F58220]/30 animate-[pulse-glow_2s_ease-in-out_infinite] px-8">
-                                <svg viewBox="0 0 24 24" className="w-12 h-12 fill-none stroke-current stroke-[3]">
-                                    <path d="M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
-                                </svg>
-                            </div>
-                        )}
-                    </React.Fragment>
-                ))}
+                            {/* Connection Arrow - Pulsing Architectural Arrow */}
+                            {index < processSteps.length - 1 && (
+                                <div className="flex-shrink-0 text-[#F58220]/30 animate-[pulse-glow_2s_ease-in-out_infinite] px-2 md:px-4">
+                                    <svg viewBox="0 0 24 24" className="w-8 h-8 fill-none stroke-current stroke-[3]">
+                                        <path d="M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+                                    </svg>
+                                </div>
+                            )}
+                        </React.Fragment>
+                    ))}
+                </div>
             </div>
 
         </section>

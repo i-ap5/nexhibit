@@ -12,12 +12,24 @@ const Portfolio: React.FC<PortfolioProps> = ({ onViewAll }) => {
     <section id="works" className="py-24 bg-white">
       <div className="container mx-auto px-6 lg:px-24">
 
-        {/* Header */}
-        <div className="mb-20">
-          <span className="text-[#F58220] block mb-4 uppercase tracking-[0.3em] font-black text-[10px]">Work</span>
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-[#1c1c1b] leading-tight">
-            Selected <br /> <span className="text-black/5 outline-text">showcases.</span>
-          </h2>
+        {/* Header Section with Integrated Button */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-20">
+          <div className="max-w-2xl">
+            <span className="type-label text-[#F58220] block mb-3 uppercase tracking-widest font-black text-[8px]">Work</span>
+            <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-[#1c1c1b] leading-[0.85]">
+              Selected <br /> <span className="text-black/10">showcases.</span>
+            </h2>
+          </div>
+
+          <button
+            onClick={onViewAll}
+            className="group flex items-center gap-6 px-10 py-4.5 bg-[#1c1c1b] text-white rounded-full transition-all duration-300 hover:bg-[#F58220] active:scale-95 mb-4"
+          >
+            <span className="text-[11px] font-bold tracking-[0.3em] uppercase">Archive</span>
+            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current stroke-2 transition-transform group-hover:translate-x-1" >
+              <path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
         </div>
 
         {/* 3-Column Grid */}
@@ -67,18 +79,6 @@ const Portfolio: React.FC<PortfolioProps> = ({ onViewAll }) => {
           ))}
         </div>
 
-        {/* Simple Navigation */}
-        <div className="mt-32 flex justify-center">
-          <button
-            onClick={onViewAll}
-            className="group flex items-center gap-6 px-12 py-5 bg-[#1c1c1b] text-white rounded-full transition-all duration-300 hover:bg-[#F58220] active:scale-95"
-          >
-            <span className="text-[10px] font-bold tracking-[0.3em] uppercase">View All Projects</span>
-            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current stroke-2 transition-transform group-hover:translate-x-1" >
-              <path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-        </div>
 
       </div>
     </section>

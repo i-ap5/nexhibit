@@ -25,28 +25,18 @@ const FullPortfolio: React.FC<FullPortfolioProps> = ({ onBack }) => {
 
     return (
         <div className="min-h-screen bg-white text-[#1c1c1b] font-sans selection:bg-[#F58220] selection:text-white">
-            {/* Nav */}
-            <header className="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-black/[0.03] py-6 px-6 lg:px-24 flex items-center justify-between">
-                <Logo mode="light" className="scale-90 origin-left" />
-                <button
-                    onClick={onBack}
-                    className="group flex items-center gap-3 px-8 py-3 rounded-full border border-black/10 hover:border-[#F58220] transition-all duration-300"
-                >
-                    <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current stroke-[2] transition-transform group-hover:-translate-x-1">
-                        <path d="M19 12H5M12 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <span className="text-[10px] font-bold tracking-widest uppercase">Back to Brand</span>
-                </button>
-            </header>
 
             <main className="pt-40 pb-32 px-6 lg:px-24 container mx-auto">
                 {/* Header Section */}
                 <div className="mb-20">
-                    <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-12 leading-none">
-                        Where Ideas Take<br /><span className="text-black/5 outline-text">Shape.</span>
-                    </h1>
+                    <div className="max-w-3xl">
+                        <span className="type-label text-[#F58220] block mb-3 uppercase tracking-widest font-black text-[8px]">Archive</span>
+                        <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-[#1c1c1b] leading-[0.85]">
+                            Where Ideas Take<br /><span className="text-black/10">Shape.</span>
+                        </h1>
+                    </div>
 
-                    <div className="flex flex-wrap gap-4">
+                    <div className="flex flex-wrap gap-4 mt-12">
                         <button
                             onClick={() => setFilter('all')}
                             className={`text-[10px] font-black uppercase tracking-widest px-8 py-4 rounded-full transition-all ${filter === 'all' ? 'bg-[#1c1c1b] text-white' : 'bg-stone-50 text-black/40 hover:bg-stone-100'}`}
@@ -125,13 +115,6 @@ const FullPortfolio: React.FC<FullPortfolioProps> = ({ onBack }) => {
                     </div>
                 )}
             </main>
-
-            <footer className="py-24 border-t border-black/5">
-                <div className="container mx-auto px-8 flex flex-col items-center gap-8">
-                    <Logo mode="light" />
-                    <p className="text-[10px] text-black/20 uppercase tracking-[0.4em]">Nexhibit Arabia 2026 // Archive</p>
-                </div>
-            </footer>
         </div>
     );
 };

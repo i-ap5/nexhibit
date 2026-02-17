@@ -20,6 +20,7 @@ const Logo: React.FC<LogoProps> = ({ mode = 'light', className = '', showText = 
             className={`flex items-center gap-3 cursor-pointer group transition-all duration-300 ${className}`}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => window.location.href = '/'}
         >
             <div className="h-full w-auto flex items-center justify-center overflow-hidden">
                 <img

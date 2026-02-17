@@ -1,90 +1,85 @@
+import React from 'react';
+import { portfolioData } from '../data/portfolio';
 
-import React, { useState } from 'react';
+interface PortfolioProps {
+  onViewAll?: () => void;
+}
 
-const projects = [
-  {
-    id: '01',
-    name: 'STC Connectivity Stall',
-    venue: 'LEAP 24 // Riyadh',
-    type: 'Bespoke Exhibition Stall',
-    img: 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&q=80&w=1600'
-  },
-  {
-    id: '02',
-    name: 'AROYA Cruise Pavilion',
-    venue: 'Maritime Vision // Jeddah',
-    type: 'Luxury Brand Pavilion',
-    img: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&q=80&w=1600'
-  },
-  {
-    id: '03',
-    name: 'NEOM Tech Hub',
-    venue: 'Vision 2030 // Tabuk',
-    type: 'Technical Immersive Stand',
-    img: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1600'
-  }
-];
-
-const Portfolio: React.FC = () => {
-  const [index, setIndex] = useState(0);
+const Portfolio: React.FC<PortfolioProps> = ({ onViewAll }) => {
+  const landingProjects = portfolioData.slice(0, 6);
 
   return (
-    <section className="relative h-screen bg-white overflow-hidden flex items-center group">
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-white/40 z-10" />
-        <img
-          src={projects[index].img}
-          className="w-full h-full object-cover opacity-20 transition-all duration-[2s] ease-in-out scale-110 group-hover:scale-100"
-          alt={projects[index].name}
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/10 to-white z-20" />
-      </div>
+    <section id="works" className="py-24 bg-white">
+      <div className="container mx-auto px-6 lg:px-24">
 
-      <div className="container mx-auto px-6 lg:px-24 z-30 h-full flex flex-col justify-center">
-        <div className="max-w-4xl text-center lg:text-left">
-          <div className="flex items-center justify-center lg:justify-start gap-4 mb-10">
-            <span className="type-label text-[#F58220]">Signature Builds</span>
-            <div className="h-[1px] w-16 bg-[#F58220]/60 hidden lg:block" />
-          </div>
-
-          <h2 className="text-[clamp(2.5rem,8vw,6.5rem)] font-extrabold text-[#1c1c1b] tracking-tighter leading-[0.85] mb-12 transition-all duration-1000">
-            {projects[index].name}
+        {/* Header */}
+        <div className="mb-20">
+          <span className="text-[#F58220] block mb-4 uppercase tracking-[0.3em] font-black text-[10px]">Work</span>
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-[#1c1c1b] leading-tight">
+            Selected <br /> <span className="text-black/5 outline-text">showcases.</span>
           </h2>
+        </div>
 
-          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-20">
-            <div className="flex flex-col items-center lg:items-start">
-              <span className="type-label text-black/30 mb-2">Venue</span>
-              <span className="text-black/80 font-semibold text-lg tracking-tight">{projects[index].venue}</span>
-            </div>
-
-            <div className="flex flex-col items-center lg:items-start">
-              <span className="type-label text-black/30 mb-2">Stall Category</span>
-              <span className="text-[#F58220] font-black text-xs uppercase tracking-[0.2em] bg-black/5 px-4 py-1 border border-black/5">
-                {projects[index].type}
-              </span>
-            </div>
-
-            <div className="flex gap-3 pt-8 lg:pt-0">
-              {projects.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setIndex(i)}
-                  className={`h-1.5 transition-all duration-500 rounded-none ${i === index ? 'w-24 bg-[#F58220]' : 'w-8 bg-black/10'}`}
+        {/* 3-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 md:gap-y-16">
+          {landingProjects.map((project, i) => (
+            <div key={project.id} className="group cursor-pointer">
+              {/* Image Container with Hover Text */}
+              <div className="relative aspect-[16/10] md:aspect-[4/5] overflow-hidden bg-stone-50 border border-black/[0.03]">
+                <img
+                  src={project.image}
+                  alt={project.heading}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <div className="absolute right-12 bottom-12 hidden lg:flex items-center gap-6 opacity-30 hover:opacity-100 transition-opacity cursor-pointer group/link">
-        <div className="text-right">
-          <span className="type-label text-[10px] block mb-1">View Project Details</span>
-          <span className="text-[8px] font-bold text-black/30 uppercase tracking-[0.3em]">Technical Case Study</span>
+                {/* Simple Powerful Hover Overlay */}
+                <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-center p-8 text-center">
+                  <p className="text-white/90 text-sm font-light leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+                  <div className="w-8 h-[1px] bg-[#F58220] mx-auto" />
+                </div>
+              </div>
+
+              {/* Text below */}
+              <div className="mt-8 flex flex-col gap-1">
+                <div className="flex items-center justify-between gap-4">
+                  <span className="text-[#F58220] text-[9px] font-black tracking-widest uppercase">0{i + 1}</span>
+                  <span className="text-[8px] font-bold text-black/20 uppercase tracking-widest bg-black/[0.03] px-2 py-1 rounded">
+                    {project.date}
+                  </span>
+                </div>
+                <h3 className="text-2xl font-bold text-[#1c1c1b] tracking-tight group-hover:text-[#F58220] transition-colors">
+                  {project.heading}
+                </h3>
+                <div className="flex flex-col gap-2 mt-1">
+                  <p className="text-black/40 text-[10px] uppercase tracking-widest font-bold truncate">{project.expo}</p>
+                  <div className="flex items-center gap-1.5 opacity-40">
+                    <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-none stroke-current stroke-[1.5]">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="12" cy="10" r="3" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span className="text-[11px] font-medium leading-none">{project.venue}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="w-14 h-14 border border-black/10 rounded-full flex items-center justify-center group-hover/link:border-[#F58220] transition-all">
-          <div className="w-2 h-2 bg-black/30 group-hover/link:bg-[#F58220] transition-colors" />
+
+        {/* Simple Navigation */}
+        <div className="mt-32 flex justify-center">
+          <button
+            onClick={onViewAll}
+            className="group flex items-center gap-6 px-12 py-5 bg-[#1c1c1b] text-white rounded-full transition-all duration-300 hover:bg-[#F58220] active:scale-95"
+          >
+            <span className="text-[10px] font-bold tracking-[0.3em] uppercase">View All Projects</span>
+            <svg viewBox="0 0 24 24" className="w-5 h-5 fill-none stroke-current stroke-2 transition-transform group-hover:translate-x-1" >
+              <path d="M17 8l4 4m0 0l-4 4m4-4H3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
         </div>
+
       </div>
     </section>
   );

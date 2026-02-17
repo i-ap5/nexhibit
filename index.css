@@ -150,14 +150,28 @@ body::before {
     font-weight: 800;
     font-size: 0.6rem;
 }
+
 @keyframes pulse-glow {
-    0%, 100% { 
-        opacity: 0.3; 
-        transform: translateX(0); 
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: translateX(0);
     }
-    50% { 
-        opacity: 1; 
-        transform: translateX(5px); 
-        filter: drop-shadow(0 0 5px #F58220); 
+
+    50% {
+        opacity: 1;
+        transform: translateX(5px);
+        filter: drop-shadow(0 0 5px #F58220);
     }
+}
+
+.outline-text {
+    -webkit-text-stroke: 1px rgba(28, 28, 27, 0.15);
+    color: transparent;
+}
+
+.outline-text-light {
+    -webkit-text-stroke: 1px rgba(28, 28, 27, 0.08);
+    color: transparent;
 }

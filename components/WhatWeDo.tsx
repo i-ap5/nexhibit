@@ -11,32 +11,32 @@ const services = [
     {
         title: "Event Management",
         desc: "Seamless production of corporate galas, product launches, and grand-scale brand experiences.",
-        image: "https://images.unsplash.com/photo-1540575861501-7ad0582373f2?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/serviceAssets/Event Management.webp"
     },
     {
         title: "Exhibition Stand Builder",
         desc: "Architectural excellence in bespoke stall design and structural fabrication.",
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop"
+        image: "/assets/serviceAssets/Exhibition Stand Builder.webp"
     },
     {
         title: "Indoor & Outdoor Branding",
         desc: "Transforming spaces through large-scale structural graphics and environmental identity.",
-        image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/serviceAssets/Indoor & Outdoor Branding.webp"
     },
     {
         title: "Display Stand Manufacturer",
         desc: "Bespoke retail fixtures and product showcases engineered for maximum visibility.",
-        image: "https://images.unsplash.com/photo-1531973576160-7125cd663d86?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/serviceAssets/Display Stand Manufacturer.webp"
     },
     {
         title: "Signages",
         desc: "Premium wayfinding systems and 3D luminous brand markers for commercial spaces.",
-        image: "https://images.unsplash.com/photo-1542744094-3a31f272c490?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/serviceAssets/Signages.webp"
     },
     {
         title: "Media Production",
         desc: "Cinematic storytelling and immersive digital content for high-impact brand narratives.",
-        image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=2070&auto=format&fit=crop"
+        image: "/assets/serviceAssets/Media Production.webp"
     }
 ];
 
@@ -98,43 +98,45 @@ const WhatWeDo: React.FC = () => {
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className="service-card group relative p-8 md:p-10 overflow-hidden bg-transparent border-r border-b border-black/5 transition-all duration-700 hover:bg-white min-h-[320px] flex flex-col will-change-transform"
+                            className="service-card group relative p-8 md:p-10 overflow-hidden bg-transparent border-r border-b border-black/5 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] min-h-[320px] flex flex-col will-change-transform"
                         >
                             {/* Image Background */}
-                            <div className="absolute inset-0 z-0 transition-transform duration-1000 scale-110 group-hover:scale-100 pointer-events-none">
+                            <div className="absolute inset-0 z-0 pointer-events-none">
                                 <img
                                     src={service.image}
                                     alt={service.title}
-                                    className="w-full h-full object-cover opacity-0 group-hover:opacity-[0.03] transition-opacity duration-700 grayscale"
+                                    className="w-full h-full object-cover opacity-0 scale-110 group-hover:opacity-100 group-hover:scale-100 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]"
                                 />
+                                {/* Overlay to keep text readable */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] mix-blend-multiply" />
                             </div>
 
-                            {/* Content - Removed justify-end for Safari stability */}
+                            {/* Content */}
                             <div className="relative z-10 flex-grow" /> {/* Spacer */}
 
-                            <div className="relative z-10 w-full text-left">
-                                <span className="text-[10px] font-black text-[#F58220] mb-3 block tracking-widest">
+                            <div className="relative z-10 w-full text-left transition-colors duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]">
+                                <span className="text-[10px] font-black text-[#F58220] mb-3 block tracking-widest group-hover:text-[#F58220] transition-colors duration-[1.2s]">
                                     0{i + 1}
                                 </span>
 
-                                <h3 className="text-2xl font-bold text-[#1c1c1b] mb-4 tracking-tight transition-colors group-hover:text-[#F58220]">
+                                <h3 className="text-2xl font-bold text-[#1c1c1b] mb-4 tracking-tight group-hover:text-white transition-colors duration-[1.2s]">
                                     {service.title}
                                 </h3>
 
-                                <p className="text-black/60 text-sm md:text-xs font-light leading-relaxed max-w-[280px]">
+                                <p className="text-black/60 text-sm md:text-xs font-light leading-relaxed max-w-[280px] group-hover:text-white/80 transition-colors duration-[1.2s]">
                                     {service.desc}
                                 </p>
 
                                 {/* Arrow Icon */}
-                                <div className="absolute top-0 right-0 w-8 h-8 rounded-full border border-black/10 flex items-center justify-center opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                                    <svg viewBox="0 0 24 24" className="w-3 h-3 fill-none stroke-[#1c1c1b] stroke-[2]" >
+                                <div className="absolute top-0 right-0 w-8 h-8 rounded-full border border-black/10 flex items-center justify-center opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-hover:border-white/30 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]">
+                                    <svg viewBox="0 0 24 24" className="w-3 h-3 fill-none stroke-[#1c1c1b] stroke-[2] group-hover:stroke-white transition-colors duration-[1.2s]" >
                                         <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </div>
                             </div>
 
                             {/* Hover Line Highlight */}
-                            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#F58220] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left z-20" />
+                            <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#F58220] scale-x-0 group-hover:scale-x-100 transition-transform duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] origin-left z-20" />
                         </div>
                     ))}
                 </div>

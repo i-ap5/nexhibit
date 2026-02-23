@@ -13,17 +13,17 @@ const PathSection: React.FC = () => {
 
   const steps = [
     {
-      phase: "01 // DREAM",
+      phase: "01 | DREAM",
       hook: "Everything begins as a dream.",
       desc: "An idea shaped by imagination, ambition, and purpose. We explore the boundaries of what's possible."
     },
     {
-      phase: "02 // DESIGN",
+      phase: "02 | DESIGN",
       hook: "Vision becomes form.",
       desc: "Precision engineering meets visual excellence. We design every detail digitally to ensure absolute control."
     },
     {
-      phase: "03 // DEFINE",
+      phase: "03 | DEFINE",
       hook: "Reality Defined.",
       desc: "From the first technical sketch to the final spotlight, we bring your brand to its physical peak."
     }

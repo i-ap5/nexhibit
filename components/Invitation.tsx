@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { submitContactForm } from '../src/services/contact';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const Invitation: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const [formState, setFormState] = React.useState({
     name: '',
     email: '',
@@ -60,15 +66,36 @@ const Invitation: React.FC = () => {
     if (error) setError('');
   };
 
+  useGSAP(() => {
+    if (!sectionRef.current) return;
+
+    gsap.fromTo(
+      ".invite-reveal",
+      { y: 80, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  }, { scope: sectionRef });
+
   return (
-    <section id="contact" className="relative py-32 bg-white overflow-hidden">
+    <section ref={sectionRef} id="contact" className="relative py-32 bg-white overflow-hidden">
       <div className="absolute inset-0 bg-blueprint opacity-[0.05] pointer-events-none" />
 
       <div className="container mx-auto px-6 lg:px-24 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32">
 
           {/* Left: Text & Details */}
-          <div>
+          <div className="invite-reveal">
             <div className="max-w-2xl mb-12">
               <span className="type-label text-[#F58220] block mb-3 uppercase tracking-widest font-black text-[8px]">Inquiry</span>
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-[#1c1c1b] leading-[0.85]">
@@ -93,7 +120,7 @@ const Invitation: React.FC = () => {
           </div>
 
           {/* Right: Modern Form */}
-          <div className="relative">
+          <div className="relative invite-reveal">
             <form onSubmit={handleSubmit} className="flex flex-col gap-10 pt-10">
 
               {/* Name */}

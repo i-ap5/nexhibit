@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, Suspense } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { MotionContext } from './context/MotionContext';
-
+import { ReactLenis } from 'lenis/react';
 // Core Components
 import Hero from './components/Hero';
 import Belief from './components/Belief';
@@ -101,27 +101,29 @@ const App: React.FC = () => {
 
   return (
     <MotionContext.Provider value={{ scrollY: 0, mouse: { x: 0, y: 0 } }}>
-      <div className="min-h-screen bg-white text-[#1c1c1b] selection:bg-[#F58220] selection:text-white font-sans scroll-smooth">
-        <CustomCursor />
+      <ReactLenis root options={{ lerp: 0.12, wheelMultiplier: 1.1, smoothWheel: true }}>
+        <div className="min-h-screen bg-white text-[#1c1c1b] selection:bg-[#F58220] selection:text-white font-sans scroll-smooth">
+          <CustomCursor />
 
-        <Navbar
-          isScrolled={isScrolled}
-          navLinks={navLinks}
-          activeSection={activeSection}
-          isMenuOpen={isMenuOpen}
-          setIsMenuOpen={setIsMenuOpen}
-          onExplorePortfolio={handlePortfolioView}
-        />
+          <Navbar
+            isScrolled={isScrolled}
+            navLinks={navLinks}
+            activeSection={activeSection}
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={setIsMenuOpen}
+            onExplorePortfolio={handlePortfolioView}
+          />
 
-        <Routes>
-          <Route path="/" element={
-            <LandingPage onViewAll={handlePortfolioView} />
-          } />
-          <Route path="/portfolio" element={<FullPortfolio onBack={() => navigate(-1)} />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={
+              <LandingPage onViewAll={handlePortfolioView} />
+            } />
+            <Route path="/portfolio" element={<FullPortfolio onBack={() => navigate(-1)} />} />
+          </Routes>
 
-        <Footer />
-      </div>
+          <Footer />
+        </div>
+      </ReactLenis>
     </MotionContext.Provider>
   );
 };

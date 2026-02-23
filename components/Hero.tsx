@@ -110,6 +110,30 @@ const Hero: React.FC<HeroProps> = ({ onExplore }) => {
     }
   }, [index, loaded]);
 
+  // --- TEXT TIMELINE REVEAL ---
+  useGSAP(() => {
+    if (loaded) {
+      const tl = gsap.timeline({ delay: 0.1 });
+
+      tl.to('.hero-label', { y: 0, opacity: 1, duration: 0.8, ease: 'power3.out' })
+        .fromTo('.hero-title-word',
+          { y: 60, opacity: 0, rotateX: -45, transformOrigin: "0% 50% -100" },
+          { y: 0, opacity: 1, rotateX: 0, duration: 1.2, stagger: 0.1, ease: "back.out(1.2)" },
+          "-=0.5"
+        )
+        .fromTo('.hero-subtitle',
+          { y: 20, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1, ease: 'power3.out' },
+          "-=0.8"
+        )
+        .fromTo('.hero-ctas',
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.5, ease: 'power3.out' },
+          "-=1.0"
+        );
+    }
+  }, [loaded]);
+
   return (
     <section
       className="relative min-h-screen w-full overflow-hidden bg-[#080808] flex items-center group cursor-none md:cursor-default"
@@ -175,30 +199,29 @@ const Hero: React.FC<HeroProps> = ({ onExplore }) => {
       <div className="w-full px-6 lg:px-24 relative z-30 pt-20">
 
         {/* Animated Entry Wrapper */}
-        <div className={`transition-all duration-1000 ease-out max-w-3xl ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+        <div className="max-w-3xl">
 
           {/* Small Label */}
-          <div className="flex items-center gap-3 mb-8">
-            {/* <span className="w-2 h-2 bg-[#F58220] rounded-full animate-pulse" /> */}
+          <div className="hero-label opacity-0 translate-y-4 flex items-center gap-3 mb-8">
             <span className="type-label text-white/70 tracking-[0.25em] text-[10px] font-bold uppercase">
               The Digital Gallery
             </span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-[clamp(3.4rem,10vw,6.5rem)] font-black text-white leading-[0.95] tracking-tighter mb-8 shadow-black drop-shadow-lg">
-            Sculpting your <br />
-            Brand
-            <span className="text-[#F58220] font-light"> Identity.</span>
+          <h1 className="text-[clamp(3.4rem,10vw,6.5rem)] font-black text-white leading-[0.95] tracking-tighter mb-8 shadow-black drop-shadow-lg" style={{ perspective: '1200px' }}>
+            <div className="hero-title-word opacity-0">Sculpting your</div>
+            <div className="hero-title-word opacity-0">Brand <span className="text-[#F58220] font-light">Identity.</span></div>
+            {/* <div className="hero-title-word opacity-0"><span className="text-[#F58220] font-light">Identity.</span></div> */}
           </h1>
 
           {/* Subtitle */}
-          <p className="text-white/80 text-lg md:text-xl leading-relaxed max-w-lg mb-12 border-l-2 border-[#F58220] pl-6 backdrop-blur-sm bg-black/10 py-2 rounded-r-md">
+          <p className="hero-subtitle opacity-0 translate-y-4 text-white/80 text-lg md:text-xl leading-relaxed max-w-lg mb-12 border-l-2 border-[#F58220] pl-6 backdrop-blur-sm bg-black/10 py-2 rounded-r-md">
             We engineer immersive exhibition experiences. Transforming empty spaces into award-winning brand environments.
           </p>
 
           {/* Dual Architectural CTAs - Pure CSS Kinetic Borders */}
-          <div className="flex flex-col sm:flex-row gap-6 items-center sm:items-start w-full">
+          <div className="hero-ctas opacity-0 translate-y-4 flex flex-col sm:flex-row gap-6 items-center sm:items-start w-full">
             {/* Primary: Start project */}
             <button className="w-full sm:w-auto group relative flex items-center justify-center p-[2px] rounded-full overflow-hidden transition-all duration-500 hover:-translate-y-1 shadow-[0_20px_40px_-15px_rgba(245,130,32,0.4)] bg-white/10">
               {/* CSS Orbiting Border (White) */}

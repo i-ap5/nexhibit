@@ -262,7 +262,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "nov 24 - dec 4",
         isFlagship: true,
-        image: "/assets/portfolioAssets/Siafa.webp"
+        image: "/assets/portfolioAssets/Siafa1.webp"
     },
     {
         id: "siafa-made-in-saudi",
@@ -273,7 +273,7 @@ export const portfolioData: PortfolioItem[] = [
         client: "",
         date: "dec 15-17",
         isFlagship: false,
-        image: "/assets/portfolioAssets/Siafa.webp"
+        image: "/assets/portfolioAssets/Siafa2.webp"
     },
     {
         id: "silqfi-money-2020",

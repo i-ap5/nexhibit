@@ -1,15 +1,42 @@
-import React from 'react';
+import React, { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioData } from '../data/portfolio';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface PortfolioProps {
   onViewAll?: () => void;
 }
 
 const Portfolio: React.FC<PortfolioProps> = ({ onViewAll }) => {
+  const containerRef = useRef<HTMLElement>(null);
   const landingProjects = portfolioData.slice(0, 6);
 
+  useGSAP(() => {
+    if (!containerRef.current) return;
+
+    gsap.fromTo(
+      ".portfolio-item",
+      { y: 80, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          toggleActions: "play none none reverse"
+        }
+      }
+    );
+  }, { scope: containerRef });
+
   return (
-    <section id="works" className="py-24 bg-white">
+    <section ref={containerRef} id="works" className="py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-6 lg:px-24">
 
         {/* Header Section with Integrated Button */}
@@ -35,7 +62,7 @@ const Portfolio: React.FC<PortfolioProps> = ({ onViewAll }) => {
         {/* 3-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-10 md:gap-y-16">
           {landingProjects.map((project, i) => (
-            <div key={project.id} className="group cursor-pointer">
+            <div key={project.id} className="group cursor-pointer portfolio-item">
               {/* Image Container with Hover Text */}
               <div className="relative aspect-[16/10] md:aspect-[4/5] overflow-hidden bg-stone-50 border border-black/[0.03]">
                 <img

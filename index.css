@@ -176,6 +176,30 @@ body::before {
     color: transparent;
 }
 
+/* Performance Hints for GSAP Animations */
+.belief-reveal,
+.portfolio-item,
+.reveal-item,
+.invite-reveal,
+.hero-label,
+.hero-title-word,
+.hero-subtitle,
+.hero-ctas,
+.service-card {
+    will-change: transform, opacity;
+}
+
+/* Mask Reveal Utility for Hero */
+.mask-line {
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+.mask-line span {
+    display: inline-block;
+}
+
 /* Screen reader only utility */
 .sr-only {
     position: absolute;

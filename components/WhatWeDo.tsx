@@ -98,38 +98,38 @@ const WhatWeDo: React.FC = () => {
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className="service-card group relative p-8 md:p-10 overflow-hidden bg-transparent border-r border-b border-black/5 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] min-h-[320px] flex flex-col will-change-transform"
+                            className="service-card group relative p-8 md:p-10 overflow-hidden bg-black border-r border-b border-white/5 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] min-h-[320px] flex flex-col will-change-transform"
                         >
                             {/* Image Background */}
                             <div className="absolute inset-0 z-0 pointer-events-none">
                                 <img
                                     src={service.image}
                                     alt={service.title}
-                                    className="w-full h-full object-cover opacity-0 scale-110 group-hover:opacity-100 group-hover:scale-100 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]"
+                                    className="w-full h-full object-cover opacity-100 grayscale scale-110 group-hover:grayscale-0 group-hover:scale-100 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]"
                                 />
-                                {/* Overlay to keep text readable */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] mix-blend-multiply" />
+                                {/* Text Readability Gradient */}
+                                <div className="absolute bottom-0 left-0 w-full h-[80%] bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]" />
                             </div>
 
                             {/* Content */}
                             <div className="relative z-10 flex-grow" /> {/* Spacer */}
 
                             <div className="relative z-10 w-full text-left transition-colors duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]">
-                                <span className="text-[10px] font-black text-[#F58220] mb-3 block tracking-widest group-hover:text-[#F58220] transition-colors duration-[1.2s]">
+                                <span className="text-[10px] font-black text-[#F58220] mb-3 block tracking-widest transition-colors duration-[1.2s]">
                                     0{i + 1}
                                 </span>
 
-                                <h3 className="text-2xl font-bold text-[#1c1c1b] mb-4 tracking-tight group-hover:text-white transition-colors duration-[1.2s]">
+                                <h3 className="text-2xl font-bold text-white mb-4 tracking-tight transition-colors duration-[1.2s]">
                                     {service.title}
                                 </h3>
 
-                                <p className="text-black/60 text-sm md:text-xs font-light leading-relaxed max-w-[280px] group-hover:text-white/80 transition-colors duration-[1.2s]">
+                                <p className="text-white/60 text-sm md:text-xs font-light leading-relaxed max-w-[280px] group-hover:text-white/90 transition-colors duration-[1.2s]">
                                     {service.desc}
                                 </p>
 
                                 {/* Arrow Icon */}
-                                <div className="absolute top-0 right-0 w-8 h-8 rounded-full border border-black/10 flex items-center justify-center opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-hover:border-white/30 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]">
-                                    <svg viewBox="0 0 24 24" className="w-3 h-3 fill-none stroke-[#1c1c1b] stroke-[2] group-hover:stroke-white transition-colors duration-[1.2s]" >
+                                <div className="absolute top-0 right-0 w-8 h-8 rounded-full border border-white/20 flex items-center justify-center opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-hover:border-white/40 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]">
+                                    <svg viewBox="0 0 24 24" className="w-3 h-3 fill-none stroke-white stroke-[2] transition-colors duration-[1.2s]" >
                                         <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
                                 </div>

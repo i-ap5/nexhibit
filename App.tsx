@@ -10,6 +10,7 @@ import PathSection from './components/PathSection';
 import Portfolio from './components/Portfolio';
 import WhatWeDo from './components/WhatWeDo';
 import MissionVision from './components/MissionVision';
+import SustainabilityV2 from './components/SustainabilityV2';
 import Invitation from './components/Invitation';
 import CustomCursor from './components/CustomCursor';
 import FullPortfolio from './components/FullPortfolio';
@@ -41,6 +42,9 @@ const LandingPage: React.FC<{
       </div>
       <div id="identity" className="relative z-50">
         <MissionVision />
+      </div>
+      <div id="sustainability" className="relative z-50">
+        <SustainabilityV2 />
       </div>
       <Invitation />
     </main>

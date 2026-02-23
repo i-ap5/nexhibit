@@ -166,6 +166,14 @@ body::before {
     }
 }
 
+.s0 {
+    fill: #004729
+}
+
+.s1 {
+    fill: #48b291
+}
+
 .outline-text {
     -webkit-text-stroke: 1px rgba(28, 28, 27, 0.15);
     color: transparent;
@@ -180,6 +188,8 @@ body::before {
 .belief-reveal,
 .portfolio-item,
 .reveal-item,
+.sust-reveal,
+.sust-card,
 .invite-reveal,
 .hero-label,
 .hero-title-word,

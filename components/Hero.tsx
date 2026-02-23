@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import LiquidEther from './LiquidEther';
 
 const images = [
   '/assets/nexh1.webp',
@@ -136,29 +135,17 @@ const Hero: React.FC<HeroProps> = ({ onExplore }) => {
 
   return (
     <section
+      onMouseMove={(e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        e.currentTarget.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+        e.currentTarget.style.setProperty('--spotlight-opacity', '1');
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.setProperty('--spotlight-opacity', '0');
+      }}
       className="relative min-h-screen w-full overflow-hidden bg-[#080808] flex items-center group cursor-none md:cursor-default"
     >
-      {/* BACKGROUND ANIMATION LAYER */}
-      <div className="absolute inset-0 z-10 pointer-events-none opacity-60">
-        <LiquidEther
-          colors={['#FFFFFF', '#FFFFFF', '#FFFFFF']}
-          mouseForce={15}
-          cursorSize={80}
-          isViscous
-          viscous={25}
-          iterationsViscous={16}
-          iterationsPoisson={16}
-          resolution={0.4}
-          isBounce={false}
-          autoDemo
-          autoSpeed={0.4}
-          autoIntensity={2.0}
-          takeoverDuration={0.3}
-          autoResumeDelay={2000}
-          autoRampDuration={1.0}
-        />
-      </div>
-
       {/* 1. SEAMLESS IMAGE SLIDESHOW */}
       <div className="absolute inset-0 z-0">
         {images.map((src, i) => (
@@ -186,6 +173,24 @@ const Hero: React.FC<HeroProps> = ({ onExplore }) => {
                 backfaceVisibility: 'hidden',
                 objectPosition: '80% 50%'
               }}
+            />
+
+            {/* Spotlight Reveal Image (Color) */}
+            <img
+              src={src}
+              alt={`Exhibition Color Preview ${i + 1}`}
+              className="absolute inset-0 w-full h-full object-cover opacity-80 pointer-events-none"
+              style={{
+                WebkitMaskImage: `radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)`,
+                maskImage: `radial-gradient(circle 300px at var(--mouse-x, 50%) var(--mouse-y, 50%), black 0%, transparent 100%)`,
+                opacity: `var(--spotlight-opacity, 0)`,
+                transform: 'translateZ(0)',
+                backfaceVisibility: 'hidden',
+                objectPosition: '80% 50%',
+                transition: 'opacity 0.3s ease-out'
+              }}
+              loading="eager"
+              decoding="async"
             />
           </div>
         ))}

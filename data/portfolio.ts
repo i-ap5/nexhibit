@@ -151,7 +151,7 @@ export const portfolioData: PortfolioItem[] = [
         venue: "Riyadh Front Convention Centre",
         client: "",
         date: "DEC 15-17",
-        isFlagship: true,
+        isFlagship: false,
         image: "/assets/portfolioAssets/Lumi1.webp"
     },
     {
@@ -162,7 +162,7 @@ export const portfolioData: PortfolioItem[] = [
         venue: "Riyadh Exhibition and Convention Centre, Malham",
         client: "",
         date: "dec 15-17",
-        isFlagship: false,
+        isFlagship: true,
         image: "/assets/portfolioAssets/Lumi2.webp"
     },
     {

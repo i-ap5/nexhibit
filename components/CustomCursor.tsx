@@ -1,71 +1,58 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const CustomCursor: React.FC = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const cursorRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
-  const [isClicking, setIsClicking] = useState(false);
 
-  useEffect(() => {
-    const updatePosition = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+  useGSAP(() => {
+    // Initial state: hidden until interaction
+    gsap.set(cursorRef.current, { opacity: 0 });
+
+    const moveCursor = (e: MouseEvent) => {
+      const { clientX: x, clientY: y } = e;
+
+      // Using quickTo for the highest performance tracking (zero-lag direct DOM updates)
+      gsap.to(cursorRef.current, {
+        x,
+        y,
+        duration: 0.1, // Very small duration for "softness" without lag
+        opacity: 1,
+        ease: "power2.out",
+        overwrite: "auto"
+      });
     };
 
     const handleMouseOver = (e: MouseEvent) => {
       const el = e.target as HTMLElement;
-      if (el.closest('button, a, .interactive, .clickable')) {
+      if (el.closest('button, a, .interactive, .clickable, .sust-card, .group')) {
         setIsHovering(true);
       } else {
         setIsHovering(false);
       }
     };
 
-    const handleMouseDown = () => {
-      setIsClicking(true);
-      setTimeout(() => setIsClicking(false), 300); // Reset after animation
-    };
-
-    window.addEventListener('mousemove', updatePosition);
+    window.addEventListener('mousemove', moveCursor);
     window.addEventListener('mouseover', handleMouseOver);
-    window.addEventListener('mousedown', handleMouseDown);
 
     return () => {
-      window.removeEventListener('mousemove', updatePosition);
+      window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
-      window.removeEventListener('mousedown', handleMouseDown);
     };
   }, []);
 
   return (
-    <>
-      <div
-        className="fixed pointer-events-none z-[9999]"
-        style={{
-          left: 0,
-          top: 0,
-          transform: `translate3d(${position.x}px, ${position.y}px, 0) translate(-50%, -50%)`,
-        }}
-      >
-        {/* The Dot Cursor */}
-        <div className={`
-          w-1.5 h-1.5 rounded-full transition-all duration-300
-          ${isHovering ? 'bg-[#F58220] scale-[2.5]' : 'bg-white'}
-        `} />
-
-        {/* Vintage Click Splash (3 lines) */}
-        <div className={`
-           absolute inset-0 flex items-center justify-center pointer-events-none
-           ${isClicking ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}
-           transition-all duration-300 ease-out
-        `}>
-          {/* Top Line */}
-          <div className="absolute h-4 w-[0.5px] bg-[#F58220] -translate-y-5" />
-          {/* Bottom Left Line */}
-          <div className="absolute h-4 w-[0.5px] bg-[#F58220] translate-x-4 translate-y-3 rotate-[120deg]" />
-          {/* Bottom Right Line */}
-          <div className="absolute h-4 w-[0.5px] bg-[#F58220] -translate-x-4 translate-y-3 -rotate-[120deg]" />
-        </div>
-      </div>
-    </>
+    <div
+      ref={cursorRef}
+      className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference flex items-center justify-center -translate-x-1/2 -translate-y-1/2"
+    >
+      {/* Optimized Simple Ring Cursor */}
+      <div className={`
+        w-5 h-5 border border-white/60 rounded-full transition-all duration-300 ease-out
+        ${isHovering ? 'scale-[1.8] border-[#F58220] bg-[#F58220]/5' : 'scale-100'}
+      `} />
+    </div>
   );
 };
 

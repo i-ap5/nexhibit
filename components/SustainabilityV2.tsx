@@ -52,7 +52,7 @@ const SustainabilityV2: React.FC = () => {
                 <div className="mb-12 md:mb-16 lg:mb-24 text-left">
                     <div className="max-w-3xl">
                         <span className="reveal-item type-label text-[#5A6D43] block mb-4 uppercase tracking-widest font-black text-[8px]">Sustainability</span>
-                        <h2 className="reveal-item text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black tracking-tighter text-[#1c1c1b] leading-[0.85]">
+                        <h2 className="reveal-item text-5xl sm:text-5xl md:text-7xl lg:text-7xl font-black tracking-tighter text-[#1c1c1b] leading-[0.85]">
                             Build for <br /> <span className="text-black/10">tomorrow.</span>
                         </h2>
                     </div>

@@ -56,10 +56,10 @@ const Footer: React.FC = () => {
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-12 lg:gap-16">
 
                     {/* LEFT: Identity & Action */}
-                    <div className="md:col-span-5 lg:col-span-4 flex flex-col items-start justify-between">
+                    <div className="md:col-span-5 lg:col-span-4 flex flex-col items-start justify-start gap-1">
                         <div className="w-full">
-                            <Logo mode="dark" className="mb-6 md:mb-10" />
-                            <p className="text-white/60 text-[13px] md:text-sm leading-relaxed font-light mb-8 md:mb-12">
+                            <Logo mode="dark" className="mb-4 md:mb-6" />
+                            <p className="text-white/60 text-[13px] md:text-sm leading-relaxed font-light mb-6 md:mb-8">
                                 Engineering immersive exhibition experiences from Riyadh to the world. We transform empty volumes into high-performance brand environments.
                             </p>
                         </div>
@@ -137,6 +137,20 @@ const Footer: React.FC = () => {
                                     </a>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Network Offices Section */}
+                <div className="mt-8 md:mt-12 pt-6 border-t border-white/5 align-center">
+                    <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12">
+                        <span className="text-white/30 text-[9px] font-black uppercase tracking-[0.4em] whitespace-nowrap shrink-0">Network Offices</span>
+                        <div className="flex flex-wrap justify-center lg:justify-start gap-2.5">
+                            {['USA', 'United Kingdom', 'Europe', 'United Arab Emirates', 'Saudi Arabia'].map((country) => (
+                                <div key={country} className="px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-[10px] md:text-[11px] text-white/50 font-medium whitespace-nowrap hover:border-[#F58220]/30 hover:text-white transition-all duration-300">
+                                    {country}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

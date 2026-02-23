@@ -35,10 +35,10 @@ const MissionVision: React.FC = () => {
       <div className="container mx-auto px-6 lg:px-24">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-32">
           {/* Mission */}
-          <div className="flex flex-col gap-12 group reveal-item">
+          <div className="flex flex-col gap-12 group reveal-item cursor-pointer outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
             <div className="flex items-center gap-6">
               <span className="text-[#F58220] font-black text-[12px] tracking-[1em] uppercase">The Mission</span>
-              <div className="flex-1 h-[1px] bg-black/5 group-hover:bg-[#F58220]/20 transition-colors" />
+              <div className="flex-1 h-[1px] bg-black/5 group-hover:bg-[#F58220]/20 group-focus:bg-[#F58220]/20 transition-colors" />
             </div>
             <h3 className="text-4xl md:text-5xl font-extralight text-[#1c1c1b] leading-[1.1] tracking-tighter">
               Transforming <span className="font-black">Visionary Ideas</span> into Exceptional Realities.
@@ -49,10 +49,10 @@ const MissionVision: React.FC = () => {
           </div>
 
           {/* Vision */}
-          <div className="flex flex-col gap-12 group reveal-item">
+          <div className="flex flex-col gap-12 group reveal-item cursor-pointer outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
             <div className="flex items-center gap-6">
               <span className="text-[#89973c] font-black text-[12px] tracking-[1em] uppercase">The Vision</span>
-              <div className="flex-1 h-[1px] bg-black/5 group-hover:bg-[#89973c]/20 transition-colors" />
+              <div className="flex-1 h-[1px] bg-black/5 group-hover:bg-[#89973c]/20 group-focus:bg-[#89973c]/20 transition-colors" />
             </div>
             <h3 className="text-4xl md:text-5xl font-extralight text-[#1c1c1b] leading-[1.1] tracking-tighter">
               Leading the <span className="font-black">Global Standard</span> in Exhibition Excellence.

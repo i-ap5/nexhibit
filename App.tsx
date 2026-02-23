@@ -106,7 +106,10 @@ const App: React.FC = () => {
   return (
     <MotionContext.Provider value={{ scrollY: 0, mouse: { x: 0, y: 0 } }}>
       <ReactLenis root options={{ lerp: 0.12, wheelMultiplier: 1.1, smoothWheel: true }}>
-        <div className="min-h-screen bg-white text-[#1c1c1b] selection:bg-[#F58220] selection:text-white font-sans scroll-smooth">
+        <div
+          className="min-h-screen bg-white text-[#1c1c1b] selection:bg-[#F58220] selection:text-white font-sans scroll-smooth"
+          onTouchStart={() => { }} // Global fix for Safari iOS hover state
+        >
           <CustomCursor />
 
           <Navbar

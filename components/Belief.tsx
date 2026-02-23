@@ -38,7 +38,7 @@ const Belief: React.FC = () => {
 
       <div className="container mx-auto px-6 lg:px-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 relative z-10">
         <div className="lg:col-span-5 flex flex-col justify-between py-4">
-          <div className="belief-reveal">
+          <div className="belief-reveal outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
             <span className="type-label text-[#F58220] block mb-8">Specialized Expertise</span>
             <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-extrabold tracking-tighter leading-[0.95] text-[#1c1c1b]">
               Exhibition Stalls <br /> <span className="font-extralight text-[#F58220]">that command attention.</span>
@@ -50,11 +50,11 @@ const Belief: React.FC = () => {
 
         <div className="lg:col-span-7 flex flex-col justify-center">
           <div className="max-w-2xl space-y-10">
-            <h3 className="belief-reveal text-2xl md:text-3xl font-light leading-tight text-black/80">
+            <h3 className="belief-reveal text-2xl md:text-3xl font-light leading-tight text-black/80 outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
               The standard for <span className="text-[#F58220] font-bold">bespoke trade show presence.</span>
             </h3>
 
-            <p className="belief-reveal text-black/40 text-lg md:text-xl font-light leading-relaxed">
+            <p className="belief-reveal text-black/40 text-lg md:text-xl font-light leading-relaxed outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
               We don't just build stands; we create brand landmarks. From small-scale custom exhibition stalls to massive country pavilions, our technical engineering ensures your brand is the centerpiece of the exhibition floor.
             </p>
 

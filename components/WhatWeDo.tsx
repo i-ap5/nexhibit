@@ -98,17 +98,20 @@ const WhatWeDo: React.FC = () => {
                     {services.map((service, i) => (
                         <div
                             key={i}
-                            className="service-card group relative p-8 md:p-10 overflow-hidden bg-black border-r border-b border-white/5 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] min-h-[320px] flex flex-col will-change-transform"
+                            className="service-card group relative p-8 md:p-10 overflow-hidden bg-black border-r border-b border-white/5 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] min-h-[320px] flex flex-col will-change-transform cursor-pointer outline-none focus:ring-0"
+                            onClick={() => { }}
+                            onTouchStart={() => { }}
+                            tabIndex={0}
                         >
                             {/* Image Background */}
                             <div className="absolute inset-0 z-0 pointer-events-none">
                                 <img
                                     src={service.image}
                                     alt={service.title}
-                                    className="w-full h-full object-cover opacity-100 grayscale scale-110 group-hover:grayscale-0 group-hover:scale-100 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]"
+                                    className="w-full h-full object-cover opacity-100 grayscale scale-110 group-hover:grayscale-0 group-hover:scale-100 group-focus:grayscale-0 group-focus:scale-100 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]"
                                 />
                                 {/* Text Readability Gradient */}
-                                <div className="absolute bottom-0 left-0 w-full h-[80%] bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]" />
+                                <div className="absolute bottom-0 left-0 w-full h-[80%] bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]" />
                             </div>
 
                             {/* Content */}
@@ -123,12 +126,12 @@ const WhatWeDo: React.FC = () => {
                                     {service.title}
                                 </h3>
 
-                                <p className="text-white/60 text-sm md:text-xs font-light leading-relaxed max-w-[280px] group-hover:text-white/90 transition-colors duration-[1.2s]">
+                                <p className="text-white/60 text-sm md:text-xs font-light leading-relaxed max-w-[280px] group-hover:text-white/90 group-focus:text-white/90 transition-colors duration-[1.2s]">
                                     {service.desc}
                                 </p>
 
                                 {/* Arrow Icon */}
-                                <div className="absolute top-0 right-0 w-8 h-8 rounded-full border border-white/20 flex items-center justify-center opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-hover:border-white/40 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]">
+                                <div className="absolute top-0 right-0 w-8 h-8 rounded-full border border-white/20 flex items-center justify-center opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 group-focus:opacity-100 group-focus:translate-y-0 group-hover:border-white/40 group-focus:border-white/40 transition-all duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)]">
                                     <svg viewBox="0 0 24 24" className="w-3 h-3 fill-none stroke-white stroke-[2] transition-colors duration-[1.2s]" >
                                         <path d="M7 17L17 7M17 7H7M17 7V17" strokeLinecap="round" strokeLinejoin="round" />
                                     </svg>
@@ -136,7 +139,7 @@ const WhatWeDo: React.FC = () => {
                             </div>
 
                             {/* Hover Line Highlight */}
-                            <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#F58220] scale-x-0 group-hover:scale-x-100 transition-transform duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] origin-left z-20" />
+                            <div className="absolute bottom-0 left-0 w-full h-[3px] bg-[#F58220] scale-x-0 group-hover:scale-x-100 group-focus:scale-x-100 transition-transform duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] origin-left z-20" />
                         </div>
                     ))}
                 </div>

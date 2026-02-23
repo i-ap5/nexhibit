@@ -64,11 +64,11 @@ const SustainabilityV2: React.FC = () => {
                 <div className="w-full max-w-[1150px] mx-auto flex flex-col lg:flex-row shadow-[0_20px_60px_rgba(0,0,0,0.06)] lg:shadow-[0_40px_100px_rgba(0,0,0,0.08)] rounded-2xl lg:rounded-3xl relative z-20 transition-all duration-1000">
 
                     {/* Left Half: Green Future */}
-                    <div className="sust-card w-full lg:flex-1 h-[280px] sm:h-[340px] lg:h-[460px] flex-shrink-0 [perspective:2000px] cursor-pointer group">
-                        <div className="relative w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)] [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]">
+                    <div className="sust-card w-full lg:flex-1 h-[280px] sm:h-[340px] lg:h-[460px] flex-shrink-0 [perspective:2000px] cursor-pointer group outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
+                        <div className="relative w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)] [transform-style:preserve-3d] [-webkit-transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-focus:[transform:rotateY(180deg)] group-focus-within:[transform:rotateY(180deg)]">
 
                             {/* Front */}
-                            <div className="absolute inset-0 bg-white p-6 sm:p-8 lg:p-14 flex flex-col items-center justify-center text-center [backface-visibility:hidden] rounded-t-2xl lg:rounded-t-none lg:rounded-l-3xl border border-black/5 lg:border-r-[0.5px] overflow-hidden">
+                            <div className="absolute inset-0 bg-white p-6 sm:p-8 lg:p-14 flex flex-col items-center justify-center text-center [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:translateZ(1px)] [-webkit-transform:translateZ(1px)] rounded-t-2xl lg:rounded-t-none lg:rounded-l-3xl border border-black/5 lg:border-r-[0.5px] overflow-hidden">
                                 <div className="absolute inset-0 bg-blueprint opacity-[0.03] pointer-events-none" />
 
                                 {/* Architectural Detailing (Pure Visual) */}
@@ -85,7 +85,7 @@ const SustainabilityV2: React.FC = () => {
                                 <div className="hidden sm:block absolute top-6 left-6 lg:top-10 lg:left-10 text-[60px] sm:text-[80px] lg:text-[120px] font-black text-black/[0.015] leading-none pointer-events-none select-none tracking-tighter">01</div>
 
                                 <div
-                                    className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 lg:w-36 lg:h-36 mb-3 sm:mb-4 lg:mb-0 text-[#F58220] transition-all duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110"
+                                    className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 lg:w-36 lg:h-36 mb-3 sm:mb-4 lg:mb-0 text-[#F58220] transition-all duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 group-focus-within:scale-110 group-focus:scale-110"
                                     id="green-future-svg-container"
                                 >
                                     <svg
@@ -117,9 +117,9 @@ const SustainabilityV2: React.FC = () => {
                             </div>
 
                             {/* Back */}
-                            <div className="absolute inset-0 bg-[#5A6D43] p-6 sm:p-8 lg:p-14 flex flex-col items-center justify-center text-center [backface-visibility:hidden] [transform:rotateY(180deg)] rounded-t-2xl lg:rounded-t-none lg:rounded-l-3xl shadow-inner border border-[#5A6D43] overflow-hidden">
-                                <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none invert scale-150 rotate-12" />
-                                <div className="relative z-10">
+                            <div className="absolute inset-0 bg-[#5A6D43] p-6 sm:p-8 lg:p-14 flex flex-col items-center justify-center text-center [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:rotateY(180deg)_translateZ(1px)] [-webkit-transform:rotateY(180deg)_translateZ(1px)] rounded-t-2xl lg:rounded-t-none lg:rounded-l-3xl shadow-inner border border-[#5A6D43] overflow-hidden">
+                                <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none invert scale-150 rotate-12 [transform:translateZ(0)]" />
+                                <div className="relative z-10 [transform:translateZ(0)]">
                                     <h3 className="text-lg sm:text-xl lg:text-3xl font-bold tracking-tight text-white mb-4 sm:mb-6 lg:mb-8">Green Future</h3>
                                     <p className="text-white/90 font-light leading-relaxed text-xs sm:text-sm lg:text-lg max-w-sm">
                                         Nexhibit Arabia builds sustainably, measures carbon footprint across all processes, minimizes CO₂ emissions, and ensures effective waste management practices.
@@ -136,11 +136,11 @@ const SustainabilityV2: React.FC = () => {
                     </div>
 
                     {/* Right Half: Vision 2030 */}
-                    <div className="sust-card w-full lg:flex-1 h-[280px] sm:h-[340px] lg:h-[460px] flex-shrink-0 [perspective:2000px] cursor-pointer group">
-                        <div className="relative w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)] [transform-style:preserve-3d] group-hover:[transform:rotateY(-180deg)]">
+                    <div className="sust-card w-full lg:flex-1 h-[280px] sm:h-[340px] lg:h-[460px] flex-shrink-0 [perspective:2000px] cursor-pointer group outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
+                        <div className="relative w-full h-full transition-transform duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)] [transform-style:preserve-3d] [-webkit-transform-style:preserve-3d] group-hover:[transform:rotateY(-180deg)] group-focus:[transform:rotateY(-180deg)] group-focus-within:[transform:rotateY(-180deg)]">
 
                             {/* Front */}
-                            <div className="absolute inset-0 bg-white p-6 sm:p-8 lg:p-14 flex flex-col items-center justify-center text-center [backface-visibility:hidden] rounded-b-2xl lg:rounded-b-none lg:rounded-r-3xl border border-black/5 lg:border-l-[0.5px] overflow-hidden">
+                            <div className="absolute inset-0 bg-white p-6 sm:p-8 lg:p-14 flex flex-col items-center justify-center text-center [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:translateZ(1px)] [-webkit-transform:translateZ(1px)] rounded-b-2xl lg:rounded-b-none lg:rounded-r-3xl border border-black/5 lg:border-l-[0.5px] overflow-hidden">
                                 <div className="absolute inset-0 bg-blueprint opacity-[0.03] pointer-events-none" />
 
                                 {/* Architectural Detailing (Pure Visual) */}
@@ -166,7 +166,7 @@ const SustainabilityV2: React.FC = () => {
                                     </svg>
                                 </div> */}
                                 <div
-                                    className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 lg:w-36 lg:h-36 mb-3 sm:mb-4 lg:mb-0 text-[#F58220] transition-all duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110"
+                                    className="relative z-10 w-16 h-16 sm:w-20 sm:h-20 lg:w-36 lg:h-36 mb-3 sm:mb-4 lg:mb-0 text-[#F58220] transition-all duration-[1.5s] ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-110 group-focus-within:scale-110 group-focus:scale-110"
                                     id="vision-2030-svg-container"
                                 >
                                     <svg
@@ -313,9 +313,9 @@ const SustainabilityV2: React.FC = () => {
                             </div>
 
                             {/* Back */}
-                            <div className="absolute inset-0 bg-[#F58220] p-6 sm:p-8 lg:p-14 flex flex-col items-center justify-center text-center [backface-visibility:hidden] [transform:rotateY(-180deg)] rounded-b-2xl lg:rounded-b-none lg:rounded-r-3xl shadow-inner border border-[#F58220] overflow-hidden">
-                                <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none invert scale-150 -rotate-12" />
-                                <div className="relative z-10">
+                            <div className="absolute inset-0 bg-[#F58220] p-6 sm:p-8 lg:p-14 flex flex-col items-center justify-center text-center [backface-visibility:hidden] [-webkit-backface-visibility:hidden] [transform:rotateY(-180deg)_translateZ(1px)] [-webkit-transform:rotateY(-180deg)_translateZ(1px)] rounded-b-2xl lg:rounded-b-none lg:rounded-r-3xl shadow-inner border border-[#F58220] overflow-hidden">
+                                <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none invert scale-150 -rotate-12 [transform:translateZ(0)]" />
+                                <div className="relative z-10 [transform:translateZ(0)]">
                                     <h3 className="text-lg sm:text-xl lg:text-3xl font-bold tracking-tight text-white mb-4 sm:mb-6 lg:mb-8">Vision 2030</h3>
                                     <p className="text-white/95 font-medium leading-relaxed text-xs sm:text-sm lg:text-lg max-w-sm">
                                         Nexhibit Arabia delivers end-to-end exhibition and fit-out solutions, combining exceptional quality, innovative execution, and strategic project management to support the ambitions of Saudi Vision 2030.

@@ -5,8 +5,15 @@ import { useGSAP } from '@gsap/react';
 const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
+  }, []);
 
   useGSAP(() => {
+    if (isTouch) return;
+
     // Initial state: hidden until interaction
     gsap.set(cursorRef.current, { opacity: 0 });
 
@@ -40,7 +47,9 @@ const CustomCursor: React.FC = () => {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
     };
-  }, []);
+  }, [isTouch]);
+
+  if (isTouch) return null;
 
   return (
     <div

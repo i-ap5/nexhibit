@@ -145,15 +145,15 @@ const Process: React.FC = () => {
                 >
                     {processSteps.map((step, index) => (
                         <React.Fragment key={index}>
-                            <div className="process-card w-[280px] md:w-[320px] flex-shrink-0">
-                                <div className="h-[240px] flex flex-col p-8 bg-[#141413] border border-white/5 border-t-white/10 transition-all duration-500 hover:border-[#F58220]/40 group relative overflow-hidden">
+                            <div className="process-card w-[280px] md:w-[320px] flex-shrink-0 cursor-pointer outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
+                                <div className="h-[240px] flex flex-col p-8 bg-[#141413] border border-white/5 border-t-white/10 transition-all duration-500 hover:border-[#F58220]/40 active:border-[#F58220]/40 focus:border-[#F58220]/40 group relative overflow-hidden">
                                     {/* Watermark */}
-                                    <span className="absolute top-6 right-6 text-3xl font-black text-white/5 group-hover:text-[#F58220]/10 transition-colors duration-500 select-none">
+                                    <span className="absolute top-6 right-6 text-3xl font-black text-white/5 group-hover:text-[#F58220]/10 group-focus:text-[#F58220]/10 transition-colors duration-500 select-none">
                                         {step.id}
                                     </span>
 
                                     {/* Icon */}
-                                    <div className="w-10 h-10 text-[#F58220] mb-8 transition-transform duration-500 group-hover:scale-110">
+                                    <div className="w-10 h-10 text-[#F58220] mb-8 transition-transform duration-500 group-hover:scale-110 group-focus:scale-110">
                                         {step.icon}
                                     </div>
 
@@ -171,7 +171,7 @@ const Process: React.FC = () => {
                                     </div>
 
                                     {/* Hover Line */}
-                                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F58220] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+                                    <div className="absolute bottom-0 left-0 w-full h-[1px] bg-[#F58220] scale-x-0 group-hover:scale-x-100 group-focus:scale-x-100 transition-transform duration-500 origin-left" />
                                 </div>
                             </div>
 

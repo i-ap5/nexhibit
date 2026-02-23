@@ -55,13 +55,13 @@ const FullPortfolio: React.FC<FullPortfolioProps> = ({ onBack }) => {
                 {/* 3-Column Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-20">
                     {items.map((project, i) => (
-                        <div key={project.id} className="group cursor-pointer">
+                        <div key={project.id} className="group cursor-pointer outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
                             {/* Card Media with Hover Text */}
                             <div className="relative aspect-[16/10] md:aspect-[4/5] overflow-hidden bg-stone-50 border border-black/[0.03]">
                                 <img
                                     src={project.image}
                                     alt={project.heading}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 group-focus:scale-105"
                                 />
                                 {project.isFlagship && (
                                     <div className="absolute top-6 left-6 z-10">
@@ -72,7 +72,7 @@ const FullPortfolio: React.FC<FullPortfolioProps> = ({ onBack }) => {
                                 )}
 
                                 {/* Overlay Description */}
-                                <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-center p-10 text-center">
+                                <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 group-focus:opacity-100 transition-opacity duration-500 flex flex-col justify-center p-10 text-center">
                                     <p className="text-white/90 text-[13px] font-light leading-relaxed mb-6">
                                         {project.description}
                                     </p>
@@ -91,7 +91,7 @@ const FullPortfolio: React.FC<FullPortfolioProps> = ({ onBack }) => {
                                     </div>
                                     <div className="h-[1px] flex-1 bg-black/5" />
                                 </div>
-                                <h3 className="text-2xl font-black tracking-tight group-hover:text-[#F58220] transition-colors leading-tight">
+                                <h3 className="text-2xl font-black tracking-tight group-hover:text-[#F58220] group-focus:text-[#F58220] transition-colors leading-tight">
                                     {project.heading}
                                 </h3>
                                 <div className="flex flex-col gap-2.5 mt-3">

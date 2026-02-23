@@ -165,8 +165,8 @@ const Footer: React.FC = () => {
 
                     <div className="hidden md:block flex-1 max-w-[100px] h-[1px] bg-white/5" />
 
-                    <div className="flex items-center gap-2 text-[12px] text-white/60 font-light">
-                        Designed & handcrafted by<a href="https://trowcode.com" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-[#F58220] font-medium transition-all duration-300 border-b border-white/10">Trowcode</a>.
+                    <div className="flex items-center gap-1 text-[12px] text-white/60 font-light">
+                        Designed & handcrafted by<a href="https://trowcode.com" target="_blank" rel="noopener noreferrer" className="text-white/80 hover:text-[#F58220] font-medium transition-all duration-300 border-b border-white/10">Trowcode</a>
                     </div>
                 </div>
             </div>

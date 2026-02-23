@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import Logo from './Logo';
 
 interface NavbarProps {
@@ -20,7 +20,23 @@ const Navbar: React.FC<NavbarProps> = ({
     onExplorePortfolio,
 }) => {
     const location = useLocation();
+    const navigate = useNavigate();
     const isLightMode = isScrolled || location.pathname === '/portfolio';
+
+    const handleNavClick = (linkId: string) => {
+        setIsMenuOpen(false);
+        if (linkId === 'portfolio-link') {
+            navigate('/portfolio');
+        } else {
+            const isHome = location.pathname === '/';
+            if (isHome) {
+                // Let standard hash fragments work, or use manual scroll
+                window.location.hash = linkId;
+            } else {
+                navigate(`/#${linkId}`);
+            }
+        }
+    };
 
     return (
         <>
@@ -59,17 +75,17 @@ const Navbar: React.FC<NavbarProps> = ({
                     </nav>
 
                     <div className="flex-1 flex justify-end items-center gap-8">
-                        <a
-                            href="#contact"
+                        <Link
+                            to={location.pathname === '/' ? '#contact' : '/#contact'}
                             className={`
-              hidden sm:flex items-center gap-3 type-label px-10 py-3 rounded-full transition-all duration-500 text-[10px] font-bold tracking-wide group/btn overflow-hidden relative
-              ${isLightMode
+               hidden sm:flex items-center gap-3 type-label px-10 py-3 rounded-full transition-all duration-500 text-[10px] font-bold tracking-wide group/btn overflow-hidden relative
+               ${isLightMode
                                     ? 'bg-black text-white hover:bg-[#F58220] hover:-translate-y-1'
                                     : 'bg-white text-black hover:bg-[#F58220] hover:text-white hover:-translate-y-1 shadow-lg'
                                 }
             `}>
                             <span className="relative z-10">Contact</span>
-                        </a>
+                        </Link>
 
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -101,18 +117,17 @@ const Navbar: React.FC<NavbarProps> = ({
 
                 <div className="flex flex-col justify-center h-full px-8 gap-1">
                     {navLinks.map((link) => (
-                        <a
+                        <div
                             key={link.id}
-                            href={link.id === 'portfolio-link' ? '/portfolio' : `#${link.id}`}
-                            onClick={() => setIsMenuOpen(false)}
-                            className="group flex flex-col py-6 border-b border-black/[0.03]"
+                            onClick={() => handleNavClick(link.id)}
+                            className="group flex flex-col py-6 border-b border-black/[0.03] cursor-pointer"
                         >
                             <div className="flex items-center justify-between">
                                 <span className="text-3xl font-extralight tracking-wide text-[#1c1c1b] group-hover:text-[#F58220] transition-colors">
                                     {link.name}
                                 </span>
                             </div>
-                        </a>
+                        </div>
                     ))}
                 </div>
 

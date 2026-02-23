@@ -51,12 +51,12 @@ const SustainabilityV2: React.FC = () => {
             <div className="container mx-auto px-6 lg:px-24 max-w-7xl relative z-10">
                 <div className="mb-12 md:mb-16 lg:mb-24 text-left">
                     <div className="max-w-3xl">
-                        <span className="reveal-item type-label text-[#5A6D43] block mb-4 uppercase tracking-widest font-black text-[8px]">Sustainability</span>
-                        <h2 className="reveal-item text-5xl sm:text-5xl md:text-7xl lg:text-7xl font-black tracking-tighter text-[#1c1c1b] leading-[0.85]">
-                            Build for <br /> <span className="text-black/10">tomorrow.</span>
+                        <span className="reveal-item type-label text-[#228B22] block mb-4 uppercase tracking-widest font-black text-[8px]">Sustainability</span>
+                        <h2 className="reveal-item text-5xl sm:text-5xl md:text-7xl lg:text-7xl font-black tracking-tighter text-[#228B22] leading-[0.85]">
+                            Build for <br /> <span className="text-[#228B22]/20">tomorrow.</span>
                         </h2>
                     </div>
-                    <p className="reveal-item text-black/40 text-xs sm:text-sm lg:text-lg font-light max-w-xl mt-4 sm:mt-6 lg:mt-8 leading-relaxed border-l border-black/10 pl-4 sm:pl-8">
+                    <p className="reveal-item text-[#228B22]/60 text-xs sm:text-sm lg:text-lg font-light max-w-xl mt-4 sm:mt-6 lg:mt-8 leading-relaxed border-l border-[#228B22]/10 pl-4 sm:pl-8">
                         Building a sustainable future through conscious design and precision execution, aligning our operations with global environmental benchmarks.
                     </p>
                 </div>
@@ -317,7 +317,7 @@ const SustainabilityV2: React.FC = () => {
                                 <div className="absolute inset-0 bg-blueprint opacity-10 pointer-events-none invert scale-150 -rotate-12 [transform:translateZ(0)]" />
                                 <div className="relative z-10 [transform:translateZ(0)]">
                                     <h3 className="text-lg sm:text-xl lg:text-3xl font-bold tracking-tight text-white mb-4 sm:mb-6 lg:mb-8">Vision 2030</h3>
-                                    <p className="text-white/95 font-medium leading-relaxed text-xs sm:text-sm lg:text-lg max-w-sm">
+                                    <p className="text-white/90 font-light leading-relaxed text-xs sm:text-sm lg:text-lg max-w-sm">
                                         Nexhibit Arabia delivers end-to-end exhibition and fit-out solutions, combining exceptional quality, innovative execution, and strategic project management to support the ambitions of Saudi Vision 2030.
                                     </p>
                                     <div className="mt-4 sm:mt-8 lg:mt-12 flex justify-center opacity-40">

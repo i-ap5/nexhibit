@@ -11,22 +11,22 @@ const services = [
     {
         title: "Event Management",
         desc: "Seamless production of corporate galas, product launches, and grand-scale brand experiences.",
-        image: "/assets/serviceAssets/Event Management.webp"
+        image: "/assets/serviceAssets/eventManagement.webp"
     },
     {
         title: "Exhibition Stand Builder",
         desc: "Architectural excellence in bespoke stall design and structural fabrication.",
-        image: "/assets/serviceAssets/Exhibition Stand Builder.webp"
+        image: "/assets/serviceAssets/exhibitionStand.webp"
     },
     {
         title: "Indoor & Outdoor Branding",
         desc: "Transforming spaces through large-scale structural graphics and environmental identity.",
-        image: "/assets/serviceAssets/Indoor & Outdoor Branding.webp"
+        image: "/assets/serviceAssets/outdoorIndoorBranding.webp"
     },
     {
         title: "Display Stand Manufacturer",
         desc: "Bespoke retail fixtures and product showcases engineered for maximum visibility.",
-        image: "/assets/serviceAssets/Display Stand Manufacturer.webp"
+        image: "/assets/serviceAssets/DisplayStand.webp"
     },
     {
         title: "Signages",
@@ -36,7 +36,7 @@ const services = [
     {
         title: "Media Production",
         desc: "Cinematic storytelling and immersive digital content for high-impact brand narratives.",
-        image: "/assets/serviceAssets/Media Production.webp"
+        image: "/assets/serviceAssets/mediaProduction.webp"
     }
 ];
 

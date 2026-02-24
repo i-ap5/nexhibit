@@ -30,8 +30,13 @@ const Navbar: React.FC<NavbarProps> = ({
         } else {
             const isHome = location.pathname === '/';
             if (isHome) {
-                // Let standard hash fragments work, or use manual scroll
-                window.location.hash = linkId;
+                const element = document.getElementById(linkId);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    window.history.pushState(null, '', `#${linkId}`);
+                } else {
+                    window.location.hash = linkId;
+                }
             } else {
                 navigate(`/#${linkId}`);
             }
@@ -63,6 +68,12 @@ const Navbar: React.FC<NavbarProps> = ({
                             <a
                                 key={link.id}
                                 href={link.id === 'portfolio-link' ? '/portfolio' : (location.pathname === '/' ? `#${link.id}` : `/#${link.id}`)}
+                                onClick={(e) => {
+                                    if (location.pathname === '/' && link.id !== 'portfolio-link') {
+                                        e.preventDefault();
+                                        handleNavClick(link.id);
+                                    }
+                                }}
                                 className={`
                   flex items-center gap-2 group/link transition-all duration-500 hover:-translate-y-0.5
                   ${isLightMode ? 'text-black/40 hover:text-black' : 'text-white/40 hover:text-white'}
@@ -75,8 +86,14 @@ const Navbar: React.FC<NavbarProps> = ({
                     </nav>
 
                     <div className="flex-1 flex justify-end items-center gap-8">
-                        <Link
-                            to={location.pathname === '/' ? '#contact' : '/#contact'}
+                        <a
+                            href={location.pathname === '/' ? '#contact' : '/#contact'}
+                            onClick={(e) => {
+                                if (location.pathname === '/') {
+                                    e.preventDefault();
+                                    handleNavClick('contact');
+                                }
+                            }}
                             className={`
                hidden sm:flex items-center gap-3 type-label px-10 py-3 rounded-full transition-all duration-500 text-[10px] font-bold tracking-wide group/btn overflow-hidden relative
                ${isLightMode
@@ -85,7 +102,7 @@ const Navbar: React.FC<NavbarProps> = ({
                                 }
             `}>
                             <span className="relative z-10">Contact</span>
-                        </Link>
+                        </a>
 
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}

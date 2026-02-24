@@ -14,6 +14,7 @@ import SustainabilityV2 from './components/SustainabilityV2';
 import Invitation from './components/Invitation';
 import CustomCursor from './components/CustomCursor';
 import FullPortfolio from './components/FullPortfolio';
+import TrustedBy from './components/TrustedBy';
 
 // New Extracted Components
 import Navbar from './components/Navbar';
@@ -28,6 +29,7 @@ const LandingPage: React.FC<{
       <div id="about" className="relative z-10 bg-white">
         <Belief />
       </div>
+      <TrustedBy />
       <div id="services" className="relative z-20">
         <WhatWeDo />
       </div>

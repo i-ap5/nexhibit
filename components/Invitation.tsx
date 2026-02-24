@@ -114,7 +114,17 @@ const Invitation: React.FC = () => {
               </div>
               <div>
                 <span className="type-label text-[#F58220]/60 mb-2 block">Headquarters</span>
-                <p className="text-lg font-light text-black/60">Riyadh, Saudi Arabia</p>
+                <a
+                  href="https://maps.app.goo.gl/Q8v3Tjtfg9faKeMV9?g_st=awb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-lg font-light text-black/60 hover:text-[#F58220] transition-colors group"
+                >
+                  Riyadh, Saudi Arabia
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 fill-none stroke-current stroke-[2.5] opacity-50 group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300">
+                    <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </a>
               </div>
             </div>
           </div>

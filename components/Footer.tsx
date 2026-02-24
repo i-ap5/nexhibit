@@ -101,12 +101,23 @@ const Footer: React.FC = () => {
                             <h4 className="text-white/40 text-[8px] md:text-[9px] font-black uppercase tracking-[0.4em] mb-6 md:mb-8">Reach Out</h4>
                             <div className="flex flex-col gap-6 md:gap-8">
                                 <div className="space-y-2">
-                                    <p className="text-[14px] text-white/90 leading-relaxed font-light tracking-tight">
+                                    <p className="text-[14px] text-white/90 leading-relaxed font-light tracking-tight mb-1">
                                         3842, Al Tabaq<br />
                                         14214, Riyadh, Saudi Arabia
                                     </p>
+                                    <a
+                                        href="https://maps.app.goo.gl/Q8v3Tjtfg9faKeMV9?g_st=awb"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[#F58220] hover:text-white transition-colors"
+                                    >
+                                        Get Directions
+                                        <svg viewBox="0 0 24 24" className="w-3.5 h-3.5 fill-none stroke-current stroke-[2.5] mb-[1px]">
+                                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" strokeLinecap="round" strokeLinejoin="round" />
+                                        </svg>
+                                    </a>
                                     <div className="flex flex-col gap-1.5 pt-2">
-                                        <a href="tel:+966536032067" className="text-[14px] font-light text-white/70 hover:text-[#F58220] transition-colors">
+                                        <a href="https://wa.me/+966536032067" target="_blank" rel="noopener noreferrer" className="text-[14px] font-light text-white/70 hover:text-[#F58220] transition-colors">
                                             +966 53 603 2067
                                         </a>
                                         <a href="mailto:info@nexhibitarabia.com" className="text-[14px] font-light text-white/70 hover:text-[#F58220] transition-colors">
@@ -115,7 +126,6 @@ const Footer: React.FC = () => {
                                     </div>
                                 </div>
 
-                                {/* Social Icons Row */}
                                 <div className="flex gap-4">
                                     <a href="https://www.instagram.com/nexhibitarabia/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:bg-[#F58220] hover:border-[#F58220] transition-all duration-300 group/social">
                                         <svg className="w-5 h-5 fill-none stroke-current stroke-[2]" viewBox="0 0 24 24">
@@ -124,15 +134,26 @@ const Footer: React.FC = () => {
                                             <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                                         </svg>
                                     </a>
+                                    <a href="https://www.facebook.com/people/Nexhibit-Arabia-Exhibition-Events-Advertising/61588459674395/?sk" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:bg-[#F58220] hover:border-[#F58220] transition-all duration-300 group/social">
+                                        <svg className="w-5 h-5 fill-none stroke-current stroke-[2]" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                        </svg>
+                                    </a>
+                                    <a href="https://x.com/nexhibitarabia" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:bg-[#F58220] hover:border-[#F58220] transition-all duration-300 group/social">
+                                        {/* <svg className="w-4 h-4 fill-current leading-none translate-y-[1px]" viewBox="0 0 24 24">
+                                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 24.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                                        </svg> */}
+                                        <svg
+                                            className="w-4 h-4 fill-current leading-none translate-y-[1px]"
+                                            viewBox="0 0 300 271"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path d="m236 0h46l-101 115 118 156h-92.6l-72.5-94.8-83 94.8h-46l107-123-113-148h94.9l65.5 86.6zm-16.1 244h25.5l-165-218h-27.4z" />
+                                        </svg>
+                                    </a>
                                     <a href="https://www.linkedin.com/company/nexhibitarabia/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:bg-[#F58220] hover:border-[#F58220] transition-all duration-300 group/social">
                                         <svg className="w-5 h-5 fill-none stroke-current stroke-[8]" viewBox="0 0 100 100">
                                             <path stroke="currentColor" strokeLinejoin="round" d="M10 32h17v48H10z M18.5 22a8.5 8.5 0 1 0 0-17 8.5 8.5 0 0 0 0 17z M41 32h16.5v6.5c2.5-4.5 8-7.5 15-7.5 14 0 17.5 9 17.5 20V80h-17V51c0-7-2-11.5-8.5-11.5-5 0-8 3.5-9.5 7-.3 1-.5 2.5-.5 4V80H41V32z" />
-                                        </svg>
-                                    </a>
-                                    <a href="mailto:info@nexhibitarabia.com" className="w-10 h-10 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-white/40 hover:text-white hover:bg-[#F58220] hover:border-[#F58220] transition-all duration-300 group/social">
-                                        <svg className="w-5 h-5 fill-none stroke-current stroke-[2]" viewBox="0 0 24 24">
-                                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                                            <polyline points="22,6 12,13 2,6" />
                                         </svg>
                                     </a>
                                 </div>
@@ -141,14 +162,36 @@ const Footer: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Network Offices Section */}
-                <div className="mt-8 md:mt-12 pt-6 border-t border-white/5 align-center">
-                    <div className="flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12">
-                        <span className="text-white/30 text-[9px] font-black uppercase tracking-[0.4em] whitespace-nowrap shrink-0">Network Offices</span>
-                        <div className="flex flex-wrap justify-center lg:justify-start gap-2.5">
-                            {['USA', 'United Kingdom', 'Europe', 'United Arab Emirates', 'Saudi Arabia'].map((country) => (
-                                <div key={country} className="px-4 py-1.5 rounded-full bg-white/[0.03] border border-white/10 text-[10px] md:text-[11px] text-white/50 font-medium whitespace-nowrap hover:border-[#F58220]/30 hover:text-white transition-all duration-300">
-                                    {country}
+                {/* Global Presence Section - Refined to match system pattern */}
+                <div className="mt-6 pt-6 border-t border-white/5">
+                    <div className="flex flex-col items-center gap-6">
+                        <span className="type-label text-white/30 text-[9px] tracking-[0.4em]">
+                            Global Presence
+                        </span>
+
+                        <div className="flex flex-wrap justify-center gap-4 max-w-4xl px-4">
+                            {[
+                                { region: 'MENA', office: 'Dubai, UAE' },
+                                { region: 'EU', office: 'Poznań, Poland' },
+                                { region: 'UK', office: 'London, United Kingdom' },
+                                { region: 'NA', office: 'North Las Vegas, USA' },
+                            ].map((item) => (
+                                <div
+                                    key={item.office}
+                                    className="flex items-center gap-3.5 px-4 py-2 rounded-full bg-white/[0.02] border border-white/5 hover:border-[#F58220]/20 transition-all duration-500 group/presence"
+                                >
+                                    {/* Region Identifier */}
+                                    <span className="text-[10px] font-black tracking-widest text-[#F58220] uppercase">
+                                        {item.region}
+                                    </span>
+
+                                    {/* Divider Dot */}
+                                    <div className="w-[1px] h-3 bg-white/10" />
+
+                                    {/* Office Text */}
+                                    <span className="text-[12px] md:text-[13px] text-white/50 group-hover/presence:text-white transition-colors font-light">
+                                        {item.office}
+                                    </span>
                                 </div>
                             ))}
                         </div>
@@ -156,7 +199,7 @@ const Footer: React.FC = () => {
                 </div>
 
                 {/* Global Signature Line */}
-                <div className="mt-12 md:mt-4 pt-8 md:pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
+                <div className="mt-8 md:mt-8 pt-8 md:pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
                     <div className="flex flex-col gap-2 text-center md:text-left">
                         <p className="text-[13px] text-white/80 font-light tracking-tight">
                             © {new Date().getFullYear()} Nexhibit Arabia. All rights reserved.

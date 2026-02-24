@@ -228,7 +228,18 @@ const Hero: React.FC<HeroProps> = ({ onExplore }) => {
           {/* Dual Architectural CTAs - Pure CSS Kinetic Borders */}
           <div className="hero-ctas opacity-0 translate-y-4 flex flex-col sm:flex-row gap-6 items-center sm:items-start w-full">
             {/* Primary: Start project */}
-            <button className="w-full sm:w-auto group relative flex items-center justify-center p-[2px] rounded-full overflow-hidden transition-all duration-500 hover:-translate-y-1 shadow-[0_20px_40px_-15px_rgba(245,130,32,0.4)] bg-white/10">
+            <button
+              onClick={() => {
+                const element = document.getElementById('contact');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                  window.history.pushState(null, '', `#contact`);
+                } else {
+                  window.location.hash = 'contact';
+                }
+              }}
+              className="w-full sm:w-auto group relative flex items-center justify-center p-[2px] rounded-full overflow-hidden transition-all duration-500 hover:-translate-y-1 shadow-[0_20px_40px_-15px_rgba(245,130,32,0.4)] bg-white/10"
+            >
               {/* CSS Orbiting Border (White) */}
               <div className="absolute inset-[-100%] animate-[border-flow_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0%,white_25%,transparent_50%)]" />
 

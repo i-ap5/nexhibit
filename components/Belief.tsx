@@ -28,6 +28,26 @@ const Belief: React.FC = () => {
         }
       }
     );
+
+    // Animate counter numbers in belief section
+    const numbers = gsap.utils.toArray<HTMLElement>('.belief-counter-number');
+    numbers.forEach((num) => {
+      const target = parseFloat(num.getAttribute('data-target') || '0');
+      gsap.fromTo(num,
+        { innerHTML: "0" },
+        {
+          innerHTML: target,
+          duration: 2.5,
+          ease: "power3.out",
+          snap: { innerHTML: 1 },
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    });
   }, { scope: sectionRef });
 
   return (
@@ -50,22 +70,45 @@ const Belief: React.FC = () => {
 
         <div className="lg:col-span-7 flex flex-col justify-center">
           <div className="max-w-2xl space-y-10">
-            <h3 className="belief-reveal text-2xl md:text-3xl font-light leading-tight text-black/80 outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
-              The standard for <span className="text-[#F58220] font-bold">bespoke trade show presence.</span>
-            </h3>
+            <div className="space-y-6">
+              <h3 className="belief-reveal text-2xl md:text-3xl font-light leading-tight text-black/80 outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
+                The standard for <span className="text-[#F58220] font-bold">bespoke trade show presence.</span>
+              </h3>
 
-            <p className="belief-reveal text-black/40 text-lg md:text-xl font-light leading-relaxed outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
-              We don't just build stands; we create brand landmarks. From small-scale custom exhibition stalls to massive country pavilions, our technical engineering ensures your brand is the centerpiece of the exhibition floor.
-            </p>
+              <p className="belief-reveal text-black/40 text-lg md:text-xl font-light leading-relaxed outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
+                We don't just build stands; we create brand landmarks. From small-scale custom exhibition stalls to massive country pavilions, our technical engineering ensures your brand is the centerpiece of the exhibition floor.
+              </p>
+            </div>
 
-            <div className="belief-reveal pt-12">
-              <div className="flex items-center gap-6 opacity-30">
-                <div className="w-16 h-[1px] bg-[#F58220]" />
-                <span className="type-label text-black/40 text-[10px]">
-                  Crafted for the spotlight
-                </span>
+            {/* Stats Row integrated into Belief */}
+            <div className="belief-reveal pt-6 grid grid-cols-3 gap-4 md:gap-8 border-t border-black/5 pt-8">
+              {/* Stat 1 */}
+              <div className="flex flex-col gap-1">
+                <div className="flex items-baseline text-3xl sm:text-4xl lg:text-5xl font-light text-[#1c1c1b] tracking-tight">
+                  <span className="belief-counter-number font-normal" data-target="100">0</span>
+                  <span className="text-[#F58220] text-xl sm:text-3xl">+</span>
+                </div>
+                <span className="text-[9px] sm:text-[11px] font-medium text-black/40 uppercase tracking-widest break-words pr-2">Clients / Year</span>
+              </div>
+              {/* Stat 2 */}
+              <div className="flex flex-col gap-1">
+                <div className="flex items-baseline text-3xl sm:text-4xl lg:text-5xl font-light text-[#1c1c1b] tracking-tight">
+                  <span className="belief-counter-number font-normal" data-target="150">0</span>
+                  <span className="text-[#F58220] text-xl sm:text-3xl">+</span>
+                </div>
+                <span className="text-[9px] sm:text-[11px] font-medium text-black/40 uppercase tracking-widest break-words pr-2">Projects / Year</span>
+              </div>
+              {/* Stat 3 */}
+              <div className="flex flex-col gap-1">
+                <div className="flex items-baseline text-3xl sm:text-4xl lg:text-5xl font-light text-[#1c1c1b] tracking-tight">
+                  <span className="belief-counter-number font-normal" data-target="15">0</span>
+                  <span className="text-[#F58220] text-xl sm:text-3xl">+</span>
+                </div>
+                <span className="text-[9px] sm:text-[11px] font-medium text-black/40 uppercase tracking-widest break-words pr-2">Years Exp.</span>
               </div>
             </div>
+
+
           </div>
         </div>
       </div>

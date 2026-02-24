@@ -96,9 +96,16 @@ const Navbar: React.FC<NavbarProps> = ({
                         <a
                             href={location.pathname === '/' ? '#contact' : '/#contact'}
                             onClick={(e) => {
+                                e.preventDefault();
                                 if (location.pathname === '/') {
-                                    e.preventDefault();
                                     handleNavClick('contact');
+                                } else {
+                                    // Trigger cinematic wipe, then redirect at midpoint
+                                    if (onCinematicJump) {
+                                        onCinematicJump('/#contact');
+                                    } else {
+                                        window.location.href = '/#contact';
+                                    }
                                 }
                             }}
                             className={`

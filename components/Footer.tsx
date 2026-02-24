@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Logo from './Logo';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+    onCinematicJump?: (id: string) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onCinematicJump }) => {
     const [riyadhTime, setRiyadhTime] = useState('');
+    const location = useLocation();
 
     useEffect(() => {
         const updateTime = () => {
@@ -64,7 +70,20 @@ const Footer: React.FC = () => {
                             </p>
                         </div>
 
-                        <a href="#contact" className="group flex items-center gap-4 bg-white/[0.03] border border-white/10 px-6 py-3 rounded-full hover:bg-[#F58220] hover:border-[#F58220] transition-all duration-500 w-fit">
+                        <a
+                            href={location.pathname === '/' ? '#contact' : '/#contact'}
+                            onClick={(e) => {
+                                if (location.pathname !== '/') {
+                                    e.preventDefault();
+                                    if (onCinematicJump) {
+                                        onCinematicJump('/#contact');
+                                    } else {
+                                        window.location.href = '/#contact';
+                                    }
+                                }
+                            }}
+                            className="group flex items-center gap-4 bg-white/[0.03] border border-white/10 px-6 py-3 rounded-full hover:bg-[#F58220] hover:border-[#F58220] transition-all duration-500 w-fit"
+                        >
                             <span className="font-light text-[14px] font-bold text-white">
                                 Get in Touch
                             </span>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback, Suspense, useRef } from 'react';
+import { useGSAP } from '@gsap/react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { MotionContext } from './context/MotionContext';
 import { ReactLenis, useLenis } from 'lenis/react';
@@ -24,8 +25,13 @@ import gsap from 'gsap';
 // Transition Overlay Component
 const TransitionWipe: React.FC<{ active: boolean; onComplete?: () => void }> = ({ active, onComplete }) => {
   const wipeRef = useRef<HTMLDivElement>(null);
+  const onCompleteRef = useRef(onComplete);
 
   useEffect(() => {
+    onCompleteRef.current = onComplete;
+  }, [onComplete]);
+
+  useGSAP(() => {
     if (active) {
       const tl = gsap.timeline();
 
@@ -35,8 +41,8 @@ const TransitionWipe: React.FC<{ active: boolean; onComplete?: () => void }> = (
           duration: 0.5,
           ease: "power3.in"
         })
-        .add(() => {
-          if (onComplete) onComplete();
+        .call(() => {
+          if (onCompleteRef.current) onCompleteRef.current();
         })
         .to(wipeRef.current, {
           x: '100%',
@@ -45,13 +51,17 @@ const TransitionWipe: React.FC<{ active: boolean; onComplete?: () => void }> = (
           delay: 0.2
         })
         .set(wipeRef.current, { display: 'none' });
+
+      return () => {
+        tl.kill();
+      };
     }
-  }, [active, onComplete]);
+  }, [active]);
 
   return (
     <div
       ref={wipeRef}
-      className="fixed inset-0 z-[9999] bg-[#F58220] pointer-events-none hidden"
+      className={`fixed inset-0 z-[9999] bg-[#F58220] hidden ${active ? 'pointer-events-auto' : 'pointer-events-none'}`}
       style={{ willChange: 'transform' }}
     >
       <div className="absolute inset-0 flex items-center justify-center">
@@ -104,11 +114,41 @@ const CinematicJumpHandler: React.FC<{
   const lenis = useLenis();
 
   useEffect(() => {
-    if (trigger && targetId && lenis) {
-      // Immediate jump using Lenis instance
-      lenis.scrollTo(`#${targetId}`, { immediate: true });
-      window.history.pushState(null, '', `#${targetId}`);
-      onJumpComplete();
+    if (trigger && targetId) {
+      // Clean targetId if it still has a hash prefix
+      const cleanId = targetId.includes('#') ? targetId.split('#').pop() : targetId;
+
+      const attemptJump = () => {
+        if (!cleanId) return false;
+        const el = document.getElementById(cleanId);
+        if (el) {
+          if (lenis) lenis.stop();
+
+          // Force layout recalculation for accuracy
+          const targetScroll = el.getBoundingClientRect().top + window.pageYOffset;
+
+          window.scrollTo({
+            top: targetScroll,
+            left: 0,
+            behavior: 'instant' as ScrollBehavior
+          });
+
+          if (lenis) lenis.start();
+          onJumpComplete();
+          return true;
+        }
+        return false;
+      };
+
+      if (!attemptJump()) {
+        const interval = setInterval(() => {
+          if (attemptJump()) clearInterval(interval);
+        }, 50);
+        setTimeout(() => {
+          clearInterval(interval);
+          onJumpComplete();
+        }, 1500);
+      }
     }
   }, [trigger, targetId, lenis, onJumpComplete]);
 
@@ -126,16 +166,26 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleCinematicJump = useCallback((targetId: string) => {
+  const handleCinematicJump = useCallback((target: string) => {
+    if (isTransitioning) return;
     setIsTransitioning(true);
-    setPendingJump(targetId);
+    setPendingJump(target);
     setShouldJumpNow(false);
-  }, []);
+  }, [isTransitioning]);
 
   const handleWipeMidpoint = useCallback(() => {
-    // This triggers the CinematicJumpHandler which has access to useLenis
-    setShouldJumpNow(true);
-  }, []);
+    if (!pendingJump) return;
+
+    if (pendingJump.startsWith('/')) {
+      // Cross-page: navigate to the path
+      navigate(pendingJump);
+      // Wait for mount
+      setShouldJumpNow(true);
+    } else {
+      // In-page
+      setShouldJumpNow(true);
+    }
+  }, [pendingJump, navigate]);
 
   const handleFinalizeJump = useCallback(() => {
     setPendingJump(null);
@@ -143,6 +193,26 @@ const App: React.FC = () => {
     // Let the panel finish sliding away before allowing interaction
     setTimeout(() => setIsTransitioning(false), 200);
   }, []);
+
+  // Handle Hash Navigation on Initial Load or Redirect back to home
+  const lenis = useLenis();
+  useEffect(() => {
+    if (location.pathname === '/' && location.hash) {
+      const targetId = location.hash.replace('#', '');
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          if (lenis) lenis.stop();
+          window.scrollTo({
+            top: el.offsetTop,
+            left: 0,
+            behavior: 'instant' as ScrollBehavior
+          });
+          if (lenis) lenis.start();
+        }
+      }, 100); // slight delay to ensure DOM is ready
+    }
+  }, [location.pathname, location.hash, lenis]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -211,14 +281,16 @@ const App: React.FC = () => {
             onCinematicJump={handleCinematicJump}
           />
 
-          <Routes>
-            <Route path="/" element={
-              <LandingPage onViewAll={handlePortfolioView} onCinematicJump={handleCinematicJump} />
-            } />
-            <Route path="/portfolio" element={<FullPortfolio onBack={() => navigate(-1)} />} />
-          </Routes>
+          <div className="relative bg-white min-h-screen">
+            <Routes>
+              <Route path="/" element={
+                <LandingPage onViewAll={handlePortfolioView} onCinematicJump={handleCinematicJump} />
+              } />
+              <Route path="/portfolio" element={<FullPortfolio onBack={() => navigate(-1)} />} />
+            </Routes>
+          </div>
 
-          <Footer />
+          <Footer onCinematicJump={handleCinematicJump} />
         </div>
       </ReactLenis>
     </MotionContext.Provider>

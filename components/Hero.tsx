@@ -18,9 +18,10 @@ const durations = [600, 600, 600, 800, 3000, 5000, 5000, 5000];
 
 interface HeroProps {
   onExplore?: () => void;
+  onContactJump?: () => void;
 }
 
-const Hero: React.FC<HeroProps> = ({ onExplore }) => {
+const Hero: React.FC<HeroProps> = ({ onExplore, onContactJump }) => {
   const [loaded, setLoaded] = useState(false);
   const [index, setIndex] = useState(0);
   const slidesRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -230,12 +231,16 @@ const Hero: React.FC<HeroProps> = ({ onExplore }) => {
             {/* Primary: Start project */}
             <button
               onClick={() => {
-                const element = document.getElementById('contact');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                  window.history.pushState(null, '', `#contact`);
+                if (onContactJump) {
+                  onContactJump();
                 } else {
-                  window.location.hash = 'contact';
+                  const element = document.getElementById('contact');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    window.history.pushState(null, '', `#contact`);
+                  } else {
+                    window.location.hash = 'contact';
+                  }
                 }
               }}
               className="w-full sm:w-auto group relative flex items-center justify-center p-[2px] rounded-full overflow-hidden transition-all duration-500 hover:-translate-y-1 shadow-[0_20px_40px_-15px_rgba(245,130,32,0.4)] bg-white/10"

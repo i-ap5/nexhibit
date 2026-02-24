@@ -9,6 +9,7 @@ interface NavbarProps {
     isMenuOpen: boolean;
     setIsMenuOpen: (open: boolean) => void;
     onExplorePortfolio: () => void;
+    onCinematicJump?: (id: string) => void;
 }
 
 const Navbar: React.FC<NavbarProps> = ({
@@ -18,6 +19,7 @@ const Navbar: React.FC<NavbarProps> = ({
     isMenuOpen,
     setIsMenuOpen,
     onExplorePortfolio,
+    onCinematicJump,
 }) => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -30,12 +32,17 @@ const Navbar: React.FC<NavbarProps> = ({
         } else {
             const isHome = location.pathname === '/';
             if (isHome) {
-                const element = document.getElementById(linkId);
-                if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                    window.history.pushState(null, '', `#${linkId}`);
+                // Use cinematic jump for long distance (contact) or if handler exists
+                if (linkId === 'contact' && onCinematicJump) {
+                    onCinematicJump(linkId);
                 } else {
-                    window.location.hash = linkId;
+                    const element = document.getElementById(linkId);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                        window.history.pushState(null, '', `#${linkId}`);
+                    } else {
+                        window.location.hash = linkId;
+                    }
                 }
             } else {
                 navigate(`/#${linkId}`);

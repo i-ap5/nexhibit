@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback, Suspense } from 'react';
+import React, { useEffect, useState, useCallback, Suspense, useRef } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { MotionContext } from './context/MotionContext';
-import { ReactLenis } from 'lenis/react';
+import { ReactLenis, useLenis } from 'lenis/react';
 // Core Components
 import Hero from './components/Hero';
 import Belief from './components/Belief';
@@ -19,13 +19,55 @@ import TrustedBy from './components/TrustedBy';
 // New Extracted Components
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import gsap from 'gsap';
+
+// Transition Overlay Component
+const TransitionWipe: React.FC<{ active: boolean; onComplete?: () => void }> = ({ active, onComplete }) => {
+  const wipeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (active) {
+      const tl = gsap.timeline();
+
+      tl.set(wipeRef.current, { x: '-100%', display: 'block' })
+        .to(wipeRef.current, {
+          x: '0%',
+          duration: 0.5,
+          ease: "power3.in"
+        })
+        .add(() => {
+          if (onComplete) onComplete();
+        })
+        .to(wipeRef.current, {
+          x: '100%',
+          duration: 0.5,
+          ease: "power3.out",
+          delay: 0.2
+        })
+        .set(wipeRef.current, { display: 'none' });
+    }
+  }, [active, onComplete]);
+
+  return (
+    <div
+      ref={wipeRef}
+      className="fixed inset-0 z-[9999] bg-[#F58220] pointer-events-none hidden"
+      style={{ willChange: 'transform' }}
+    >
+      <div className="absolute inset-0 flex items-center justify-center">
+        <div className="w-24 h-24 border-2 border-white/20 rounded-full animate-ping" />
+      </div>
+    </div>
+  );
+};
 
 const LandingPage: React.FC<{
   onViewAll: () => void;
-}> = ({ onViewAll }) => {
+  onCinematicJump: (id: string) => void;
+}> = ({ onViewAll, onCinematicJump }) => {
   return (
     <main className="relative z-10">
-      <Hero onExplore={onViewAll} />
+      <Hero onExplore={onViewAll} onContactJump={() => onCinematicJump('contact')} />
       <div id="about" className="relative z-10 bg-white">
         <Belief />
       </div>
@@ -53,13 +95,54 @@ const LandingPage: React.FC<{
   );
 };
 
+// This internal component handles the actual jump using Lenis to bypass smooth scrolling
+const CinematicJumpHandler: React.FC<{
+  targetId: string | null;
+  onJumpComplete: () => void;
+  trigger: boolean;
+}> = ({ targetId, onJumpComplete, trigger }) => {
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (trigger && targetId && lenis) {
+      // Immediate jump using Lenis instance
+      lenis.scrollTo(`#${targetId}`, { immediate: true });
+      window.history.pushState(null, '', `#${targetId}`);
+      onJumpComplete();
+    }
+  }, [trigger, targetId, lenis, onJumpComplete]);
+
+  return null;
+};
+
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [pendingJump, setPendingJump] = useState<string | null>(null);
+  const [shouldJumpNow, setShouldJumpNow] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const handleCinematicJump = useCallback((targetId: string) => {
+    setIsTransitioning(true);
+    setPendingJump(targetId);
+    setShouldJumpNow(false);
+  }, []);
+
+  const handleWipeMidpoint = useCallback(() => {
+    // This triggers the CinematicJumpHandler which has access to useLenis
+    setShouldJumpNow(true);
+  }, []);
+
+  const handleFinalizeJump = useCallback(() => {
+    setPendingJump(null);
+    setShouldJumpNow(false);
+    // Let the panel finish sliding away before allowing interaction
+    setTimeout(() => setIsTransitioning(false), 200);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -96,23 +179,27 @@ const App: React.FC = () => {
     { name: 'Services', id: 'services' },
     { name: 'Process', id: 'process' },
     { name: 'Works', id: 'works' },
-    { name: 'Portfolio', id: 'portfolio-link' }, // Special ID for routing if needed, or link to /portfolio
+    { name: 'Portfolio', id: 'portfolio-link' },
   ];
 
   const handlePortfolioView = useCallback(() => {
     navigate('/portfolio');
   }, [navigate]);
 
-  const isPortfolioPage = location.pathname === '/portfolio';
-
   return (
     <MotionContext.Provider value={{ scrollY: 0, mouse: { x: 0, y: 0 } }}>
       <ReactLenis root options={{ lerp: 0.12, wheelMultiplier: 1.1, smoothWheel: true }}>
         <div
-          className="min-h-screen bg-white text-[#1c1c1b] selection:bg-[#F58220] selection:text-white font-sans scroll-smooth"
-          onTouchStart={() => { }} // Global fix for Safari iOS hover state
+          className="min-h-screen bg-white text-[#1c1c1b] selection:bg-[#F58220] selection:text-white font-sans"
+          onTouchStart={() => { }}
         >
           <CustomCursor />
+          <TransitionWipe active={isTransitioning} onComplete={handleWipeMidpoint} />
+          <CinematicJumpHandler
+            targetId={pendingJump}
+            trigger={shouldJumpNow}
+            onJumpComplete={handleFinalizeJump}
+          />
 
           <Navbar
             isScrolled={isScrolled}
@@ -121,11 +208,12 @@ const App: React.FC = () => {
             isMenuOpen={isMenuOpen}
             setIsMenuOpen={setIsMenuOpen}
             onExplorePortfolio={handlePortfolioView}
+            onCinematicJump={handleCinematicJump}
           />
 
           <Routes>
             <Route path="/" element={
-              <LandingPage onViewAll={handlePortfolioView} />
+              <LandingPage onViewAll={handlePortfolioView} onCinematicJump={handleCinematicJump} />
             } />
             <Route path="/portfolio" element={<FullPortfolio onBack={() => navigate(-1)} />} />
           </Routes>

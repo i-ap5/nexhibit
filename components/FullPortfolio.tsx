@@ -1,7 +1,11 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { portfolioData, PortfolioItem } from '../data/portfolio';
 import Logo from './Logo';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 interface FullPortfolioProps {
     onBack: () => void;
@@ -10,6 +14,7 @@ interface FullPortfolioProps {
 const FullPortfolio: React.FC<FullPortfolioProps> = ({ onBack }) => {
     const [filter, setFilter] = useState<'all' | 'flagship'>('all');
     const [items, setItems] = useState<PortfolioItem[]>(portfolioData);
+    const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -23,20 +28,58 @@ const FullPortfolio: React.FC<FullPortfolioProps> = ({ onBack }) => {
         }
     }, [filter]);
 
+    useGSAP(() => {
+        if (!containerRef.current) return;
+
+        // 1. Initial Header Reveal (Immediate)
+        const headerTl = gsap.timeline();
+        headerTl.fromTo(
+            ".full-reveal",
+            { y: 60, opacity: 0 },
+            {
+                y: 0,
+                opacity: 1,
+                duration: 1.2,
+                stagger: 0.1,
+                ease: "power3.out"
+            }
+        );
+
+        // 2. Grid Items Reveal (On Scroll)
+        const items = gsap.utils.toArray<HTMLElement>('.full-portfolio-item');
+        items.forEach((item) => {
+            gsap.fromTo(
+                item,
+                { y: 100, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: item,
+                        start: "top 90%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
+        });
+    }, { scope: containerRef, dependencies: [items] });
+
     return (
-        <div className="min-h-screen bg-white text-[#1c1c1b] font-sans selection:bg-[#F58220] selection:text-white">
+        <div ref={containerRef} className="min-h-screen bg-white text-[#1c1c1b] font-sans selection:bg-[#F58220] selection:text-white">
 
             <main className="pt-40 pb-32 px-6 lg:px-24 container mx-auto">
                 {/* Header Section */}
                 <div className="mb-20">
                     <div className="max-w-3xl">
-                        <span className="type-label text-[#F58220] block mb-3 uppercase tracking-widest font-black text-[8px]">Archive</span>
-                        <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-[#1c1c1b] leading-[0.85]">
+                        <span className="full-reveal type-label text-[#F58220] block mb-3 uppercase tracking-widest font-black text-[8px]">Archive</span>
+                        <h1 className="full-reveal text-6xl md:text-8xl font-black tracking-tighter text-[#1c1c1b] leading-[0.85]">
                             Where Ideas Take<br /><span className="text-black/10">Shape.</span>
                         </h1>
                     </div>
 
-                    <div className="flex flex-wrap gap-4 mt-12">
+                    <div className="full-reveal flex flex-wrap gap-4 mt-12">
                         <button
                             onClick={() => setFilter('all')}
                             className={`text-[10px] font-black uppercase tracking-widest px-8 py-4 rounded-full transition-all ${filter === 'all' ? 'bg-[#1c1c1b] text-white' : 'bg-stone-50 text-black/40 hover:bg-stone-100'}`}
@@ -55,7 +98,7 @@ const FullPortfolio: React.FC<FullPortfolioProps> = ({ onBack }) => {
                 {/* 3-Column Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-20">
                     {items.map((project, i) => (
-                        <div key={project.id} className="group cursor-pointer outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
+                        <div key={project.id} className="full-portfolio-item group cursor-pointer outline-none focus:ring-0" onClick={() => { }} onTouchStart={() => { }} tabIndex={0}>
                             {/* Card Media with Hover Text */}
                             <div className="relative aspect-[16/10] md:aspect-[4/5] overflow-hidden bg-stone-50 border border-black/[0.03]">
                                 <img

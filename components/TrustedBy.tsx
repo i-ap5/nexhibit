@@ -32,7 +32,8 @@ const TrustedBy: React.FC = () => {
                             key={`r1-${index}`}
                             src={`/assets/trustedAssets/${logo}`}
                             alt={`Trusted Partner ${index + 1}`}
-                            className="h-8 sm:h-12 lg:h-12 w-auto max-w-[110px] sm:max-w-[140px] lg:max-w-[170px] object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+                            className="h-8 sm:h-12 lg:h-12 w-auto max-w-[110px] sm:max-w-[140px] lg:max-w-[170px] object-contain grayscale opacity-40 hover:grayscale-0 active:grayscale-0 focus:grayscale-0 hover:opacity-100 active:opacity-100 focus:opacity-100 transition-all duration-500 cursor-pointer"
+                            tabIndex={0}
                         />
                     ))}
                     {row1Logos.map((logo, index) => (
@@ -40,7 +41,8 @@ const TrustedBy: React.FC = () => {
                             key={`r1-dup-${index}`}
                             src={`/assets/trustedAssets/${logo}`}
                             alt={`Trusted Partner Duplicate ${index + 1}`}
-                            className="h-8 sm:h-12 lg:h-12 w-auto max-w-[110px] sm:max-w-[140px] lg:max-w-[170px] object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+                            className="h-8 sm:h-12 lg:h-12 w-auto max-w-[110px] sm:max-w-[140px] lg:max-w-[170px] object-contain grayscale opacity-40 hover:grayscale-0 active:grayscale-0 focus:grayscale-0 hover:opacity-100 active:opacity-100 focus:opacity-100 transition-all duration-500 cursor-pointer"
+                            tabIndex={0}
                         />
                     ))}
                 </div>
@@ -52,7 +54,8 @@ const TrustedBy: React.FC = () => {
                             key={`r2-${index}`}
                             src={`/assets/trustedAssets/${logo}`}
                             alt={`Trusted Partner ${index + 1}`}
-                            className="h-8 sm:h-12 lg:h-12 w-auto max-w-[110px] sm:max-w-[140px] lg:max-w-[170px] object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+                            className="h-8 sm:h-12 lg:h-12 w-auto max-w-[110px] sm:max-w-[140px] lg:max-w-[170px] object-contain grayscale opacity-40 hover:grayscale-0 active:grayscale-0 focus:grayscale-0 hover:opacity-100 active:opacity-100 focus:opacity-100 transition-all duration-500 cursor-pointer"
+                            tabIndex={0}
                         />
                     ))}
                     {row2Logos.map((logo, index) => (
@@ -60,7 +63,8 @@ const TrustedBy: React.FC = () => {
                             key={`r2-dup-${index}`}
                             src={`/assets/trustedAssets/${logo}`}
                             alt={`Trusted Partner Duplicate ${index + 1}`}
-                            className="h-8 sm:h-12 lg:h-12 w-auto max-w-[110px] sm:max-w-[140px] lg:max-w-[170px] object-contain grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+                            className="h-8 sm:h-12 lg:h-12 w-auto max-w-[110px] sm:max-w-[140px] lg:max-w-[170px] object-contain grayscale opacity-40 hover:grayscale-0 active:grayscale-0 focus:grayscale-0 hover:opacity-100 active:opacity-100 focus:opacity-100 transition-all duration-500 cursor-pointer"
+                            tabIndex={0}
                         />
                     ))}
                 </div>
